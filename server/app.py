@@ -17,11 +17,23 @@ from models import *
 
 class Dishes(Resource):
     def get(self):
-        dishes = [dish.to_dict() for dish in Dish.query.all()]
+        dishes = [
+            dish.to_dict(rules=("-quantities.ingredient.quantities",))
+            for dish in Dish.query.all()
+        ]
         return make_response(dishes, 200)
 
 
 api.add_resource(Dishes, "/dishes")
+
+
+class Ingredients(Resource):
+    def get(self):
+        ingredients = [ingredient.to_dict() for ingredient in Ingredient.query.all()]
+        return make_response(ingredients, 200)
+
+
+api.add_resource(Ingredients, "/ingredients")
 
 
 if __name__ == "__main__":
