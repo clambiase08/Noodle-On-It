@@ -148,6 +148,13 @@ if __name__ == "__main__":
             {"user_id": 2, "name": "favorites"},
             {"user_id": 1, "name": "weekend"},
         ]
+        for collection in collection_list:
+            new_collection = Collection(
+                user_id = collection["user_id"],
+                name = collection["name"],
+            )
+            db.session.add(new_collection)
+            db.session.commit()
 
         note_list = []
         for _ in range(len(dish_list)):
