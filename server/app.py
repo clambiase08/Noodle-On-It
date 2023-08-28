@@ -28,8 +28,17 @@ class Signup(Resource):
         db.session.add(new_user)
         db.session.commit()
         session['user_id'] = new_user.id
+        
+        all = Collection(name = "all", user_id = new_user.id)
+        favorite = Collection(name = "favorite", user_id = new_user.id)
 
-        return new_user.to_dict()
+        db.session.add(all)
+        db.session.add(favorite)
+        db.session.commit()
+
+        # return new_user.to_dict()
+        return new_user.to_dict(only=("username",))
+    
 api.add_resource(Signup, "/signup")
 
 class Login(Resource):
@@ -50,7 +59,7 @@ class CheckSession(Resource):
     def get(self):
         user = User.query.filter(User.id == session.get('user_id')).first()
         if user:
-            return user.to_dict()
+            return user.to_dict(only=("username",))
         else:
             return {'message': '401: Not Authorized'}, 401
 

@@ -17,7 +17,7 @@ export default function Signup({ username, setUsername }) {
       body: JSON.stringify({ username, email, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => console.log(user.username));
+        r.json().then((user) => setUsername(user));
         history.push("/");
       }
     });
