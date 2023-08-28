@@ -3,17 +3,19 @@ import SearchBar from "./SearchBar";
 import DishCard from "./DishCard";
 import { useHistory } from "react-router-dom";
 
-export default function Home({ dishes, setDishes }) {
+export default function Home({ dishes }) {
   const history = useHistory();
 
-  // const handleSearch = (searchText) => {
-  //   const filteredDishes = dishes.filter((dish) =>
-  //     dish.title.toLowerCase().includes(searchText.toLowerCase())
-  //   );
-  //   setDishes(filteredDishes);
-  // };
+  const [filteredDishes, setFilteredDishes] = useState(dishes);
 
-  const dishList = dishes.map((dish) => {
+  const handleSearch = (searchText) => {
+    const filtered = dishes.filter((dish) =>
+      dish.dish_name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredDishes(filtered);
+  };
+
+  const dishList = filteredDishes.map((dish) => {
     const handleClick = () => {
       history.push(`/dish-details/${dish.id}`);
     };
@@ -27,13 +29,10 @@ export default function Home({ dishes, setDishes }) {
       />
     );
   });
-  // {dishes.map((dish) => (
-  //   <DishDetail key={dish.id} {...dish} />
-  // ))}
 
   return (
     <div>
-      {/* <SearchBar onSearch={handleSearch} /> */}
+      <SearchBar onSearch={handleSearch} />
       {dishList}
     </div>
   );

@@ -19,7 +19,7 @@ export default function Main() {
     <div>
       <Switch>
         <Route exact path="/">
-          <Home dishes={dishes} setDishes={setDishes} />
+          <Home dishes={dishes} />
         </Route>
         <Route path="/dish-details/:id">
           <DishDetail dishes={dishes} />
