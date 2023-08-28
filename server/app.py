@@ -6,6 +6,7 @@
 from flask import request, session
 from flask_restful import Resource
 from models import *
+from werkzeug.exceptions import Unauthorized
 
 # Local imports
 from config import app, db, api
@@ -13,6 +14,14 @@ from config import app, db, api
 
 
 # Views go here!
+
+@app.before_request
+def check_if_logged_in():
+    open_access = ['signup', 'login']
+    if request.endpoint not in open_access and not session.get("user_id"):
+        print('Checking if')
+        raise Unauthorized
+        # return {'error': 'no good!'}, 401
 
 class Signup(Resource):
     def post(self):
