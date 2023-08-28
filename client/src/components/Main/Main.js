@@ -4,6 +4,7 @@ import Home from "./Home";
 import Collections from "./Collections";
 import ShoppingList from "./ShoppingList";
 import AddRecipe from "./AddRecipe";
+import DishDetail from "./DishDetail";
 
 export default function Main() {
   const [dishes, setDishes] = useState([]);
@@ -19,6 +20,9 @@ export default function Main() {
       <Switch>
         <Route exact path="/">
           <Home dishes={dishes} setDishes={setDishes} />
+        </Route>
+        <Route path="/dish-details/:id">
+          <DishDetail dishes={dishes} />
         </Route>
         <Route path="/collections" component={Collections} />
         <Route path="/shopping-list" component={ShoppingList} />
