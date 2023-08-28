@@ -3,11 +3,8 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
-from app import bcrypt
 
-db = SQLAlchemy(engine_options={"echo": True})
-
-from config import db
+from config import db, bcrypt
 
 # Models go here!
 
@@ -101,7 +98,8 @@ class Dish(db.Model, SerializerMixin):
 
     user = db.relationship("User", back_populates="dishes")
     notes = db.relationship("Note", back_populates="dish", cascade="delete")
-    quantities = db.relationship("Quantity", back_populates="dishes", cascade="delete")
+    quantities = db.relationship("Quantity", back_populates="dish", cascade="delete")
+    ingredients = association_proxy("quantities", "ingredient")
 
 
 class Quantity(db.Model, SerializerMixin):
@@ -117,7 +115,7 @@ class Quantity(db.Model, SerializerMixin):
         return f"Quantity {self.quantity}"
 
     dish = db.relationship("Dish", back_populates="quantities")
-    ingredient = db.relationship("Dish", back_populates="ingredients")
+    ingredient = db.relationship("Ingredient", back_populates="quantities")
 
     @validates(measurement)
     def validate_measurement(self, key, measurement):
@@ -153,5 +151,6 @@ class Ingredient(db.Model, SerializerMixin):
         return f"Ingredient {self.name}"
 
     quantities = db.relationship(
-        "Quantity", back_populates="ingredients", cascade="delete"
+        "Quantity", back_populates="ingredient", cascade="delete"
     )
+    dishes = association_proxy("quantities", "dish")
