@@ -20,6 +20,7 @@ if __name__ == "__main__":
         Dish.query.delete()
         Collection.query.delete()
         User.query.delete()
+        Note.query.delete()
 
         fake = Faker()
 
@@ -39,7 +40,7 @@ if __name__ == "__main__":
         for user in user_list:
             new_user = User(
                 username=user["username"],
-                password=user["password"],
+                _password_hash=user["password"],
                 email=user["email"],
             )
             db.session.add(new_user)
@@ -150,11 +151,13 @@ if __name__ == "__main__":
 
         note_list = []
         for _ in range(len(dish_list)):
-            user_id = randint(1, 2)
+            collection_id = randint(1, 5)
             dish_id = randint(1, 10)
-            notes = f"""{fake.sentence}"""
+            # notes = f"{fake.sentence()}"
 
-            note = Note(user_id=user_id, dish_id=dish_id, notes=notes)
+            note = Note(
+                collection_id=collection_id, dish_id=dish_id, notes=fake.sentence()
+            )
             db.session.add(note)
             db.session.commit()
             note_list.append(note)
@@ -417,7 +420,7 @@ if __name__ == "__main__":
 
         quantity_list = []
         for _ in range(len(dish_list)):
-            measurement = measurement_list[randint(0, len(measurement_list - 1))]
+            measurement = measurement_list[randint(0, (len(measurement_list)) - 1)]
             quantity = randint(1, 20)
             dish_id = randint(1, 10)
             ingredient_id = randint(1, len(ingredient_list))

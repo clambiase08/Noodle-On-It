@@ -61,7 +61,7 @@ class Note(db.Model, SerializerMixin):
     __tablename__ = "notes"
 
     id = db.Column(db.Integer, primary_key=True)
-    notes = db.Column(db.Text)
+    notes = db.Column(db.String)
     collection_id = db.Column(db.Integer, db.ForeignKey("collections.id"))
     dish_id = db.Column(db.Integer, db.ForeignKey("dishes.id"))
 
