@@ -32,10 +32,12 @@ class User(db.Model, SerializerMixin):
     @password_hash.setter
     def password_hash(self, password):
         password_hash = bcrypt.generate_password_hash(password.encode("utf-8"))
-        self.password_hash = password_hash.decode("utf-8")
+        self._password_hash = password_hash.decode("utf-8")
 
     def authenticate(self, password):
+        # return bcrypt.check_password_hash(password.encode("utf-8"),self._password_hash)
         return bcrypt.check_password_hash(self._password_hash, password.encode("utf-8"))
+
 
     collections = db.relationship("Collection", back_populates="user", cascade="delete")
     dishes = db.relationship("Dish", back_populates="user", cascade="delete")

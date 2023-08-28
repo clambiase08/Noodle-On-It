@@ -24,27 +24,27 @@ if __name__ == "__main__":
 
         fake = Faker()
 
-        user_list = [
-            {
-                "username": "yonir",
-                "password": "nottellingyou",
-                "email": "fakeemail@email.com",
-            },
-            {
-                "username": "xtina",
-                "password": "nuh-uh",
-                "email": "anotherfakeemail@email.com",
-            },
-        ]
+        # user_list = [
+        #     {
+        #         "username": "yonir",
+        #         "password": "nottellingyou",
+        #         "email": "fakeemail@email.com",
+        #     },
+        #     {
+        #         "username": "xtina",
+        #         "password": "nuh-uh",
+        #         "email": "anotherfakeemail@email.com",
+        #     },
+        # ]
 
-        for user in user_list:
-            new_user = User(
-                username=user["username"],
-                _password_hash=user["password"],
-                email=user["email"],
-            )
-            db.session.add(new_user)
-            db.session.commit()
+        # for user in user_list:
+        #     new_user = User(
+        #         username=user["username"],
+        #         _password_hash=user["password"],
+        #         email=user["email"],
+        #     )
+        #     db.session.add(new_user)
+        #     db.session.commit()
 
         dish_list = [
             {
