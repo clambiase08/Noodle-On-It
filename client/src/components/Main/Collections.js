@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import CollectionCard from "./CollectionCard";
 import { Card, SimpleGrid, Text, Box, Button } from "@chakra-ui/react";
 
-export default function Collections({ collections }) {
+export default function Collections({ collections, setCollections }) {
   const history = useHistory();
 
   const collectionList = collections.map((collection) => {
@@ -21,6 +21,8 @@ export default function Collections({ collections }) {
         name={collection.name}
         onClick={handleClick}
         onClickCollection={handleClickCollection}
+        collections={collections}
+        setCollections={setCollections}
       />
     );
   });

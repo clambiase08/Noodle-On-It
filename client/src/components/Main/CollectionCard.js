@@ -16,6 +16,8 @@ export default function CollectionCard({
   onClick,
   onClickCollection,
   id,
+  collections,
+  setCollections,
 }) {
   function handleEdit(e) {
     // console.log(id);
@@ -46,6 +48,17 @@ export default function CollectionCard({
       </Heading>
     );
   }
+
+  function handleDelete() {
+    fetch(`/collections/${id}`, {
+      method: "DELETE",
+    }).then((res) => res.json());
+    const updatedCollections = collections.filter(
+      (collection) => collection.id !== id
+    );
+    setCollections(updatedCollections);
+  }
+
   return (
     <Card>
       <CardBody>
@@ -68,6 +81,7 @@ export default function CollectionCard({
       <CardFooter>
         <Button onClick={onClick}>Get Shopping List</Button>
         <Button onClick={onClickCollection}>Show Recipes</Button>
+        <Button onClick={handleDelete}>Delete</Button>
       </CardFooter>
     </Card>
   );
