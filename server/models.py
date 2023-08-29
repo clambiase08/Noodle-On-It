@@ -55,6 +55,7 @@ class Collection(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    image = db.Column(db.String)
 
     def __repr__(self):
         return f"Collection {self.name}, ID {self.id}"
