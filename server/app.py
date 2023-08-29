@@ -17,13 +17,13 @@ from models import *
 # Views go here!
 
 
-@app.before_request
-def check_if_logged_in():
-    open_access = ["signup", "login"]
-    if request.endpoint not in open_access and not session.get("user_id"):
-        print("Checking if")
-        raise Unauthorized
-        # return {'error': 'no good!'}, 401
+# @app.before_request
+# def check_if_logged_in():
+#     open_access = ["signup", "login", "dishes"]
+#     if request.endpoint not in open_access and not session.get("user_id"):
+#         print("Checking if")
+#         raise Unauthorized
+#         # return {'error': 'no good!'}, 401
 
 
 class Signup(Resource):
@@ -42,7 +42,7 @@ class Signup(Resource):
         session["user_id"] = new_user.id
 
         all = Collection(name="all", user_id=new_user.id)
-        favorite = Collection(name="favorite", user_id=new_user.id)
+        favorite = Collection(name="favorites", user_id=new_user.id)
 
         db.session.add(all)
         db.session.add(favorite)
@@ -111,6 +111,15 @@ class Ingredients(Resource):
 
 
 api.add_resource(Ingredients, "/ingredients")
+
+
+class Collections(Resource):
+    def get(self):
+        collections = [c.to_dict(rules=("-user",)) for c in Collection.query.all()]
+        return make_response(collections, 200)
+
+
+api.add_resource(Collections, "/collections")
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ if __name__ == "__main__":
         Quantity.query.delete()
         Dish.query.delete()
         Collection.query.delete()
-        # User.query.delete()
+        User.query.delete()
         Note.query.delete()
 
         fake = Faker()
@@ -141,20 +141,20 @@ if __name__ == "__main__":
             db.session.add(new_dish)
             db.session.commit()
 
-        collection_list = [
-            {"user_id": 1, "name": "all"},
-            {"user_id": 2, "name": "all"},
-            {"user_id": 1, "name": "favorites"},
-            {"user_id": 2, "name": "favorites"},
-            {"user_id": 1, "name": "weekend"},
-        ]
-        for collection in collection_list:
-            new_collection = Collection(
-                user_id=collection["user_id"],
-                name=collection["name"],
-            )
-            db.session.add(new_collection)
-            db.session.commit()
+        # collection_list = [
+        #     {"user_id": 1, "name": "all"},
+        #     {"user_id": 2, "name": "all"},
+        #     {"user_id": 1, "name": "favorites"},
+        #     {"user_id": 2, "name": "favorites"},
+        #     {"user_id": 1, "name": "weekend"},
+        # ]
+        # for collection in collection_list:
+        #     new_collection = Collection(
+        #         user_id=collection["user_id"],
+        #         name=collection["name"],
+        #     )
+        #     db.session.add(new_collection)
+        #     db.session.commit()
 
         note_list = []
         for _ in range(len(dish_list)):
