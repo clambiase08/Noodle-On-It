@@ -46,10 +46,11 @@ class User(db.Model, SerializerMixin):
 
 class Collection(db.Model, SerializerMixin):
     __tablename__ = "collections"
-    # serialize_rules = (
-    #     "-notes.collection",
-    #     "-user.collections",
-    # )
+    serialize_rules = (
+        "-notes.collection",
+        # "-user.collections",
+        # "-notes.dish",
+    )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -59,15 +60,18 @@ class Collection(db.Model, SerializerMixin):
         return f"Collection {self.name}, ID {self.id}"
 
     # user = db.relationship("User", back_populates="collections")
-    # notes = db.relationship("Note", back_populates="collection", cascade="delete")
+    notes = db.relationship("Note", backref="collection", cascade="delete")
+    dishes = association_proxy("notes", "dish")
 
 
 class Note(db.Model, SerializerMixin):
     __tablename__ = "notes"
-    # serialize_rules = (
-    #     "-collection.notes",
-    #     "-dish.notes",
-    # )
+    serialize_rules = (
+        "-collection",
+        "-dish.notes",
+        "-dish.quantities",
+        "-dish.user",
+    )
 
     id = db.Column(db.Integer, primary_key=True)
     notes = db.Column(db.String)
@@ -159,7 +163,7 @@ class Ingredient(db.Model, SerializerMixin):
     __tablename__ = "ingredients"
     serialize_rules = (
         "-quantities.ingredient",
-        # "-quantities.dish",
+        "-quantities.dish",
     )
 
     id = db.Column(db.Integer, primary_key=True)

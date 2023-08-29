@@ -122,5 +122,14 @@ class Collections(Resource):
 api.add_resource(Collections, "/collections")
 
 
+class Notes(Resource):
+    def get(self):
+        notes = [note.to_dict() for note in Note.query.all()]
+        return make_response(notes, 200)
+
+
+api.add_resource(Notes, "/notes")
+
+
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
