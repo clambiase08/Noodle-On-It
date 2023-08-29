@@ -10,6 +10,7 @@ import Main from "./Main/Main";
 function App() {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
+  const [collections, setCollections] = useState([]);
 
   useEffect(() => {
     fetch("/check_session").then((r) => {
@@ -19,10 +20,16 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    fetch("/collections")
+      .then((res) => res.json())
+      .then((collections) => setCollections(collections));
+  }, []);
+
   return (
     <ChakraProvider>
       <Router>
-        <NavBar />
+        <NavBar collections={collections} user={user} />
         <Route path="/login">
           <Login username={username} setUsername={setUsername} />
         </Route>
@@ -33,7 +40,7 @@ function App() {
           <Signup username={username} setUsername={setUsername} />
         </Route>
         <Route path="/">
-          <Main />
+          <Main collections={collections} />
         </Route>
       </Router>
     </ChakraProvider>
