@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function SearchBar({ onSearch }) {
-  const [search, setSearch] = React.useState("");
+  const [search, setSearch] = useState("");
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);

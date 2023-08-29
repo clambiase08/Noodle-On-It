@@ -14,6 +14,7 @@ class User(db.Model, SerializerMixin):
     serialize_rules = (
         "-collections.user",
         "-dishes.user",
+        "-dishes.note",
     )
 
     id = db.Column(db.Integer, primary_key=True)
@@ -37,14 +38,17 @@ class User(db.Model, SerializerMixin):
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password.encode("utf-8"))
 
-    collections = db.relationship("Collection", back_populates="user", cascade="delete")
-    dishes = db.relationship("Dish", back_populates="user", cascade="delete")
+    collections = db.relationship("Collection", backref="user", cascade="delete")
+    dishes = db.relationship("Dish", backref="user", cascade="delete")
     notes = association_proxy("dishes", "note")
 
 
 class Collection(db.Model, SerializerMixin):
     __tablename__ = "collections"
-    serialize_rules = ("-notes.collection",)
+    # serialize_rules = (
+    #     "-notes.collection",
+    #     "-user.collections",
+    # )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -53,12 +57,16 @@ class Collection(db.Model, SerializerMixin):
     def __repr__(self):
         return f"Collection {self.name}, ID {self.id}"
 
-    user = db.relationship("User", back_populates="collections")
-    notes = db.relationship("Note", back_populates="collection", cascade="delete")
+    # user = db.relationship("User", back_populates="collections")
+    # notes = db.relationship("Note", back_populates="collection", cascade="delete")
 
 
 class Note(db.Model, SerializerMixin):
     __tablename__ = "notes"
+    # serialize_rules = (
+    #     "-collection.notes",
+    #     "-dish.notes",
+    # )
 
     id = db.Column(db.Integer, primary_key=True)
     notes = db.Column(db.String)
@@ -68,15 +76,17 @@ class Note(db.Model, SerializerMixin):
     def __repr__(self):
         return f"Note {self.notes}, ID {self.id}"
 
-    collection = db.relationship("Collection", back_populates="notes")
-    dish = db.relationship("Dish", back_populates="notes")
+    # collection = db.relationship("Collection", back_populates="notes")
+    # dish = db.relationship("Dish", back_populates="notes")
 
 
 class Dish(db.Model, SerializerMixin):
     __tablename__ = "dishes"
     serialize_rules = (
+        "-user.dishes",
         "-notes.dish",
         "-quantities.dish",
+        "-quantities.ingredient",
     )
 
     id = db.Column(db.Integer, primary_key=True)
@@ -96,14 +106,18 @@ class Dish(db.Model, SerializerMixin):
             raise ValueError("Time must be greater than 0")
         return value
 
-    user = db.relationship("User", back_populates="dishes")
-    notes = db.relationship("Note", back_populates="dish", cascade="delete")
-    quantities = db.relationship("Quantity", back_populates="dish", cascade="delete")
+    # user = db.relationship("User", back_populates="dishes")
+    notes = db.relationship("Note", backref="dish", cascade="delete")
+    quantities = db.relationship("Quantity", backref="dish", cascade="delete")
     ingredients = association_proxy("quantities", "ingredient")
 
 
 class Quantity(db.Model, SerializerMixin):
     __tablename__ = "quantities"
+    # serialize_rules = (
+    #     "-dish.quantities",
+    #     "-ingredient.quantities",
+    # )
 
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer)
@@ -114,8 +128,8 @@ class Quantity(db.Model, SerializerMixin):
     def __repr__(self):
         return f"Quantity {self.quantity}"
 
-    dish = db.relationship("Dish", back_populates="quantities")
-    ingredient = db.relationship("Ingredient", back_populates="quantities")
+    # dish = db.relationship("Dish", back_populates="quantities")
+    # ingredient = db.relationship("Ingredient", back_populates="quantities")
 
     @validates(measurement)
     def validate_measurement(self, key, measurement):
@@ -142,7 +156,10 @@ class Quantity(db.Model, SerializerMixin):
 
 class Ingredient(db.Model, SerializerMixin):
     __tablename__ = "ingredients"
-    serialize_rules = ("-quantities.ingredient",)
+    serialize_rules = (
+        "-quantities.ingredient",
+        # "-quantities.dish",
+    )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -150,7 +167,5 @@ class Ingredient(db.Model, SerializerMixin):
     def __repr__(self):
         return f"Ingredient {self.name}"
 
-    quantities = db.relationship(
-        "Quantity", back_populates="ingredient", cascade="delete"
-    )
+    quantities = db.relationship("Quantity", backref="ingredient", cascade="delete")
     dishes = association_proxy("quantities", "dish")
