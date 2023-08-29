@@ -10,7 +10,12 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-export default function CollectionCard({ image, name, onClick }) {
+export default function CollectionCard({
+  image,
+  name,
+  onClick,
+  onClickCollection,
+}) {
   return (
     <Card>
       <CardBody>
@@ -29,6 +34,7 @@ export default function CollectionCard({ image, name, onClick }) {
       </CardBody>
       <CardFooter>
         <Button onClick={onClick}>Get Shopping List</Button>
+        <Button onClick={onClickCollection}>Show Recipes</Button>
       </CardFooter>
     </Card>
   );
