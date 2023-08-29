@@ -24,7 +24,7 @@ export default function Home({ dishes, loading }) {
       history.push(`/dish-details/${dish.id}`);
     };
     return (
-      <Card>
+      <Card as="main" mt="20">
         <DishCard
           key={dish.id}
           image={dish.image}

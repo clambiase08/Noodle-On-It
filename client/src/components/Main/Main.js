@@ -7,9 +7,9 @@ import AddRecipe from "./AddRecipe";
 import DishDetail from "./DishDetail";
 import CollectionDetail from "./CollectionDetail";
 
-export default function Main() {
+export default function Main({ collections }) {
   const [dishes, setDishes] = useState([]);
-  const [collections, setCollections] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,12 +19,6 @@ export default function Main() {
         setDishes(dishes);
         setLoading(false);
       });
-  }, []);
-
-  useEffect(() => {
-    fetch("/collections")
-      .then((res) => res.json())
-      .then((collections) => setCollections(collections));
   }, []);
 
   return (
