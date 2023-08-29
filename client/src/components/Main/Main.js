@@ -36,7 +36,7 @@ export default function Main({ collections }) {
           <Home dishes={dishes} loading={loading} />
         </Route>
         <Route path="/dish-details/:id">
-          <DishDetail dishes={dishes} />
+          <DishDetail dishes={dishes} collections={collections} />
         </Route>
         <Route exact path="/collections">
           <Collections collections={collections} />

@@ -63,7 +63,7 @@ class Login(Resource):
         password = request.get_json()["password"]
         if user.authenticate(password):
             session["user_id"] = user.id
-            return user.to_dict(only=("username",))
+            return user.to_dict(rules=("_password_hash",))
 
         return {"error": "Invalid username or password"}, 401
 
@@ -75,7 +75,9 @@ class CheckSession(Resource):
     def get(self):
         user = User.query.filter(User.id == session.get("user_id")).first()
         if user:
-            return user.to_dict(only=("username",))
+            return user.to_dict(rules=("_password_hash",))
+            # return user.to_dict(only=("username",))
+        
         else:
             return {"message": "401: Not Authorized"}, 401
 
