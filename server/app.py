@@ -77,7 +77,7 @@ class CheckSession(Resource):
         if user:
             return user.to_dict(rules=("_password_hash",))
             # return user.to_dict(only=("username",))
-        
+
         else:
             return {"message": "401: Not Authorized"}, 401
 
@@ -171,16 +171,17 @@ class CollectionById(Resource):
         db.session.delete(collection)
         db.session.commit()
         return make_response({}, 204)
-    def patch(self,id):
+
+    def patch(self, id):
         data = request.get_json()
         collection = Collection.query.filter(Collection.id == id).first()
         if not collection:
             abort(404, "cannot find user id")
         for key in data:
-            setattr(collection,key,data[key])
+            setattr(collection, key, data[key])
         db.session.add(collection)
-        db.session.commit() 
-        return make_response(collection.to_dict(),202)
+        db.session.commit()
+        return make_response(collection.to_dict(), 202)
 
 
 api.add_resource(CollectionById, "/collections/<int:id>")
@@ -190,13 +191,14 @@ class Notes(Resource):
     def get(self):
         notes = [note.to_dict() for note in Note.query.all()]
         return make_response(notes, 200)
+
     def post(self):
         data = request.get_json()
         try:
             new_note = Note(
-                notes = data['notes'],
-                collection_id = data['collection_id'],
-                dish_id = data['dish_id']
+                notes=data["notes"],
+                collection_id=data["collection_id"],
+                dish_id=data["dish_id"],
             )
         except ValueError as e:
             abort(422, e.args[0])
@@ -204,6 +206,7 @@ class Notes(Resource):
         db.session.commit()
 
         return make_response(new_note.to_dict(), 201)
+
 
 api.add_resource(Notes, "/notes")
 

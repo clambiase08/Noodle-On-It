@@ -8,7 +8,11 @@ import {
   Card,
   CardFooter,
   Button,
+  CardHeader,
+  Flex,
+  IconButton,
 } from "@chakra-ui/react";
+import { FaTrashAlt } from "react-icons/fa";
 
 export default function CollectionCard({
   image,
@@ -67,21 +71,38 @@ export default function CollectionCard({
             src={image}
             alt={name}
             borderRadius="lg"
-            boxSize="sm"
+            boxSize="xs"
             objectFit="cover"
           />
         </Center>
         <Stack mt="6" spacing="3">
-          {/* <Heading size="md" contentEditable onBlur={handleEdit}>
-            {name}
-          </Heading> */}
-          {nameJSX}
+          <Flex justifyContent="space-between" alignItems="center">
+            <Heading size="md">{nameJSX}</Heading>
+            <IconButton
+              size="sm"
+              icon={<FaTrashAlt />}
+              variant="outline"
+              colorScheme="orange"
+              onClick={handleDelete}
+            ></IconButton>
+          </Flex>
         </Stack>
       </CardBody>
-      <CardFooter>
-        <Button onClick={onClick}>Get Shopping List</Button>
-        <Button onClick={onClickCollection}>Show Recipes</Button>
-        <Button onClick={handleDelete}>Delete</Button>
+      <CardFooter
+        justify="space-between"
+        flexWrap="wrap"
+        sx={{
+          "& > button": {
+            minW: "136px",
+          },
+        }}
+      >
+        <Button colorScheme="orange" size="sm" onClick={onClick}>
+          Get Shopping List
+        </Button>
+        <Button colorScheme="orange" size="sm" onClick={onClickCollection}>
+          Show Recipes
+        </Button>
       </CardFooter>
     </Card>
   );

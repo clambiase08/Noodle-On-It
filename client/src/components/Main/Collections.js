@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import CollectionCard from "./CollectionCard";
-import { Card, SimpleGrid, Text, Box, Button } from "@chakra-ui/react";
+import { Card, SimpleGrid, Text, Box, Button, Center } from "@chakra-ui/react";
 
 export default function Collections({ collections, setCollections }) {
   const history = useHistory();
@@ -44,10 +44,20 @@ export default function Collections({ collections, setCollections }) {
       >
         My Collections
       </Text>
-      <SimpleGrid columns={3} spacing={4} mt="10">
+      <SimpleGrid columns={4} spacing={4} mt="10">
         {collectionList}
       </SimpleGrid>
-      <Button onClick={handleClickAdd}>Add Collection</Button>
+      <Center>
+        <Button
+          alignItems={"center"}
+          colorScheme="orange"
+          mt="10"
+          variant="outline"
+          onClick={handleClickAdd}
+        >
+          Add Collection
+        </Button>
+      </Center>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import DishCard from "./DishCard";
-import { Card } from "@chakra-ui/react";
+import { Card, SimpleGrid, Text } from "@chakra-ui/react";
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 
@@ -12,7 +12,6 @@ export default function CollectionDetail({ collections }) {
   const collection = collections.find(
     (collection) => collection.id === parseInt(id)
   );
-
 
   if (!collection) {
     return <div>Collection not found</div>;
@@ -28,34 +27,27 @@ export default function CollectionDetail({ collections }) {
         name={note.dish.dish_name}
         image={note.dish.image}
         onClick={handleClick}
+        displayUser={false}
       />
     );
   });
 
-  // const noteForm = (
-  //   <Formik
-  //     initialValues={{ notes: "" }}
-  //     onSubmit={(value) => console.log(value)}
-  //   >
-  //     {(props) => (
-  //       <form onSubmit={props.handleSubmit}>
-  //         <textarea
-  //           type="paragraph"
-  //           // type="text"
-  //           onChange={props.handleChange}
-  //           value={props.values.notes}
-  //           name="notes"
-  //           style={{ border: "1px solid" }}
-  //         ></textarea>
-  //         <button type="submit">Submit</button>
-  //       </form>
-  //     )}
-  //   </Formik>
-  // );
-
   return (
-    <div>
-      <Card>{collectionDishes}</Card>
-    </div>
+    <Card>
+      <Text
+        lineHeight="1.2"
+        fontWeight="bold"
+        fontSize="56px"
+        color="Color . Gray 1"
+        maxWidth="100%"
+        mt="20"
+        textAlign={"center"}
+      >
+        Recipes in {collection.name}
+      </Text>
+      <SimpleGrid columns={4} spacing={4} mt="10">
+        {collectionDishes}
+      </SimpleGrid>
+    </Card>
   );
 }

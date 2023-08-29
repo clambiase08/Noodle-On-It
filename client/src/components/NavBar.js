@@ -87,14 +87,17 @@ export default function NavBar({ collections, user }) {
             />
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-            <Text
-              textAlign={useBreakpointValue({ base: "center", md: "left" })}
-              fontFamily={"heading"}
-              color={useColorModeValue("gray.800", "white")}
-            >
-              Noodle On It
-            </Text>
-
+            <NavLink to="/">
+              <Text
+                textAlign={useBreakpointValue({ base: "center", md: "left" })}
+                fontFamily={"heading"}
+                color={useColorModeValue("orange.400", "white")}
+                fontWeight={"bold"}
+                fontSize={"20"}
+              >
+                Noodle On It
+              </Text>
+            </NavLink>
             <Flex display={{ base: "none", md: "flex" }} ml={10}>
               <DesktopNav navItems={NAV_ITEMS} />
             </Flex>
@@ -114,10 +117,10 @@ export default function NavBar({ collections, user }) {
                   fontSize={"sm"}
                   fontWeight={600}
                   color={"white"}
-                  bg={"pink.400"}
+                  bg={"orange.400"}
                   href={"#"}
                   _hover={{
-                    bg: "pink.300",
+                    bg: "orange.300",
                   }}
                 >
                   Logout
@@ -144,10 +147,10 @@ export default function NavBar({ collections, user }) {
                     fontSize={"sm"}
                     fontWeight={600}
                     color={"white"}
-                    bg={"pink.400"}
+                    bg={"orange.400"}
                     href={"#"}
                     _hover={{
-                      bg: "pink.300",
+                      bg: "orange.300",
                     }}
                   >
                     Sign Up
@@ -222,13 +225,13 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={"block"}
       p={2}
       rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      _hover={{ bg: useColorModeValue("orange.50", "gray.900") }}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
             transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
+            _groupHover={{ color: "orange.400" }}
             fontWeight={500}
           >
             {label}
@@ -244,7 +247,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={"center"}
           flex={1}
         >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={"orange.400"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Box>
