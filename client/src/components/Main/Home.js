@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import DishCard from "./DishCard";
 import { useHistory } from "react-router-dom";
-import { SimpleGrid, Card } from "@chakra-ui/react";
+import { SimpleGrid, Card, Box } from "@chakra-ui/react";
 
 export default function Home({ dishes, loading }) {
   const history = useHistory();
@@ -24,7 +24,7 @@ export default function Home({ dishes, loading }) {
       history.push(`/dish-details/${dish.id}`);
     };
     return (
-      <Card as="main" mt="20">
+      <Card>
         <DishCard
           key={dish.id}
           image={dish.image}
@@ -37,11 +37,11 @@ export default function Home({ dishes, loading }) {
   });
 
   return (
-    <div>
+    <Box as="main" mt="20">
       <SearchBar onSearch={handleSearch} />
       <SimpleGrid columns={3} spacing={4}>
         {loading ? <p>Loading...</p> : dishList}
       </SimpleGrid>
-    </div>
+    </Box>
   );
 }

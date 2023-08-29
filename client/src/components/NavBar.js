@@ -56,7 +56,7 @@ export default function NavBar({ collections, user }) {
 
   return (
     <>
-      <Box as="header" position="fixed" w="100%" zIndex={2}>
+      <Box as="header" position="fixed" top={0} w="100%" zIndex={2}>
         <Flex
           bg={useColorModeValue("white", "gray.800")}
           color={useColorModeValue("gray.600", "white")}
