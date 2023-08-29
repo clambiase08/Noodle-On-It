@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function Signup({ username, setUsername }) {
+export default function Signup({ user, setUser }) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
 
   const history = useHistory();
 
@@ -17,7 +18,7 @@ export default function Signup({ username, setUsername }) {
       body: JSON.stringify({ username, email, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUsername(user));
+        r.json().then((user) => setUser(user));
         history.push("/");
       }
     });
