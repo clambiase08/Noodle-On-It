@@ -25,6 +25,7 @@ export default function DishDetail({ dishes }) {
   const ingredientList = dish.quantities.map((quantity) => {
     return (
       <IngredientList
+        key={quantity.id}
         ingredient={quantity.ingredient.name}
         quantity={quantity.quantity}
         measurement={quantity.measurement}
@@ -32,14 +33,10 @@ export default function DishDetail({ dishes }) {
     );
   });
 
-  // const ingredientQty = dish.quantities.map((quantity) => {
-  //   return quantity.quantity;
-  // });
-
   return (
     <Grid templateColumns="repeat(5, 1fr)" gap={4} background="#FCF8F3">
       <GridItem colSpan={1}>
-        <Card maxW="sm">
+        <Card>
           <CardBody>
             <Image
               src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
