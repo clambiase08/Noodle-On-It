@@ -9,6 +9,7 @@ import DishDetail from "./DishDetail";
 export default function Main() {
   const [dishes, setDishes] = useState([]);
   const [collections, setCollections] = useState([]);
+  const [ingredientList, setIngredientList] = useState([]);
 
   useEffect(() => {
     fetch("/dishes")
@@ -20,6 +21,12 @@ export default function Main() {
     fetch("/collections")
       .then((res) => res.json())
       .then((collections) => setCollections(collections));
+  }, []);
+
+  useEffect(() => {
+    fetch("/ingredients")
+      .then((res) => res.json())
+      .then((ingredients) => setIngredientList(ingredients));
   }, []);
 
   return (
@@ -35,7 +42,9 @@ export default function Main() {
         <Route path="/shopping-list/:id">
           <ShoppingList collections={collections} />
         </Route>
-        <Route path="/add-recipe" component={AddRecipe} />
+        <Route path="/add-recipe">
+          <AddRecipe ingredientList={ingredientList} />
+        </Route>
       </Switch>
     </div>
   );

@@ -1,11 +1,11 @@
 import React from "react";
 import AddRecipeForm from "./AddRecipeForm";
 
-export default function AddRecipe() {
+export default function AddRecipe({ ingredientList }) {
   return (
     <div>
       <h1>Add recipe</h1>
-      <AddRecipeForm />
+      <AddRecipeForm ingredientList={ingredientList} />
     </div>
   );
 }
