@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import Logout from "./Logout";
@@ -19,19 +20,21 @@ function App() {
   });
 
   return (
-    <Router>
-      <NavBar />
-      <Route path="/login">
-        <Login username={username} setUsername={setUsername} />
-      </Route>
-      <Route path="/logout">
-        <Logout setUser={setUser} />
-      </Route>
-      <Route path="/signup">
-        <Signup username={username} setUsername={setUsername} />
-      </Route>
-      <Route component={Main} />
-    </Router>
+    <ChakraProvider>
+      <Router>
+        <NavBar />
+        <Route path="/login">
+          <Login username={username} setUsername={setUsername} />
+        </Route>
+        <Route path="/logout">
+          <Logout setUser={setUser} />
+        </Route>
+        <Route path="/signup">
+          <Signup username={username} setUsername={setUsername} />
+        </Route>
+        <Route component={Main} />
+      </Router>
+    </ChakraProvider>
   );
 }
 

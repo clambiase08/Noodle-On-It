@@ -51,7 +51,7 @@ if __name__ == "__main__":
                 "dish_name": "Spaghetti Bolognese",
                 "user_id": 1,
                 "instructions": "1. Heat oil in a pan. 2. Add onions and garlic. 3. Brown ground beef. 4. Add tomatoes and herbs. 5. Simmer for 30 minutes. 6. Cook spaghetti. 7. Serve sauce over spaghetti.",
-                "image": None,
+                "image": "images/spaghetti.png",
                 "time_to_cook": 45,
                 "time_to_prepare": 15,
             },
@@ -150,8 +150,8 @@ if __name__ == "__main__":
         ]
         for collection in collection_list:
             new_collection = Collection(
-                user_id = collection["user_id"],
-                name = collection["name"],
+                user_id=collection["user_id"],
+                name=collection["name"],
             )
             db.session.add(new_collection)
             db.session.commit()
