@@ -45,13 +45,25 @@ function App() {
       <Router>
         <NavBar collections={collections} user={user} />
         <Route path="/login">
-          <Login user={user} setUser={setUser} />
+          <Login
+            user={user}
+            setUser={setUser}
+            fetchUser={fetchUser}
+            collections={collections}
+            setCollections={setCollections}
+          />
         </Route>
         <Route path="/logout">
           <Logout setUser={setUser} />
         </Route>
         <Route path="/signup">
-          <Signup user={user} setUser={setUser} />
+          <Signup
+            user={user}
+            setUser={setUser}
+            fetchUser={fetchUser}
+            collections={collections}
+            setCollections={setCollections}
+          />
         </Route>
         <Route path="/">
           <Main

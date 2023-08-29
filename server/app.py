@@ -49,7 +49,7 @@ class Signup(Resource):
         db.session.commit()
 
         # return new_user.to_dict()
-        return new_user.to_dict(only=("username",))
+        return new_user.to_dict()
 
 
 api.add_resource(Signup, "/signup")

@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 // import { Link, NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function Login({ user, setUser }) {
+export default function Login({
+  user,
+  setUser,
+  collections,
+  setCollections,
+  fetchUser,
+}) {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
@@ -19,6 +25,9 @@ export default function Login({ user, setUser }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
+        // setCollections()
+        fetchUser(user);
+
         history.push("/");
       }
     });
