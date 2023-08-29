@@ -8,11 +8,18 @@ import DishDetail from "./DishDetail";
 
 export default function Main() {
   const [dishes, setDishes] = useState([]);
+  const [collections, setCollections] = useState([]);
 
   useEffect(() => {
     fetch("/dishes")
       .then((res) => res.json())
       .then((dishes) => setDishes(dishes));
+  }, []);
+
+  useEffect(() => {
+    fetch("/collections")
+      .then((res) => res.json())
+      .then((collections) => setDishes(collections));
   }, []);
 
   return (
@@ -25,7 +32,7 @@ export default function Main() {
           <DishDetail dishes={dishes} />
         </Route>
         <Route path="/collections" component={Collections} />
-        <Route path="/shopping-list" component={ShoppingList} />
+        <Route path="/shopping-list/:id" component={ShoppingList} />
         <Route path="/add-recipe" component={AddRecipe} />
       </Switch>
     </div>
