@@ -17,7 +17,6 @@ import IngredientList from "./IngredientList";
 export default function DishDetail({ dishes }) {
   const { id } = useParams();
   const dish = dishes.find((dish) => dish.id === parseInt(id));
-  console.log(dish);
 
   if (!dish) {
     return <div>Dish not found</div>;

@@ -10,12 +10,16 @@ export default function Collections({ collections }) {
     const handleClick = () => {
       history.push(`/shopping-list/${collection.id}`);
     };
+    const handleClickCollection = () => {
+      history.push(`/collections/${collection.id}`);
+    };
     return (
       <CollectionCard
         key={collection.id}
         image={collection.image}
         name={collection.name}
         onClick={handleClick}
+        onClickCollection={handleClickCollection}
       />
     );
   });

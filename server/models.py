@@ -70,7 +70,6 @@ class Note(db.Model, SerializerMixin):
     serialize_rules = (
         "-collection",
         "-dish.notes",
-        "-dish.quantities",
         "-dish.user",
     )
 
@@ -92,7 +91,7 @@ class Dish(db.Model, SerializerMixin):
         "-user.dishes",
         "-notes.dish",
         "-quantities.dish",
-        "-quantities.ingredient",
+        # "-quantities.ingredient",
     )
 
     id = db.Column(db.Integer, primary_key=True)
