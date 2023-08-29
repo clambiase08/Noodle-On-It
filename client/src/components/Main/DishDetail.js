@@ -23,12 +23,23 @@ export default function DishDetail({ dishes, collections }) {
   const [toggleNote, setToggleNote] = useState(false);
   const [notesList, setNotesList] = useState([]);
 
-  console.log(notesList);
+  // console.log(collections);
+  const relevantCollections = collections.map((collection) => collection.id);
+  console.log(relevantCollections);
   useEffect(() => {
     fetch("/notes")
       .then((r) => r.json())
       .then((notes) => {
-        const filteredNotes = notes.filter((note) => note.dish_id == id);
+        // console.log(notes);
+        // const relevantCollections = collections.map(
+        //   (collection) => collection.id
+        // );
+        // console.log(relevantCollections);
+
+        const filteredNotes = notes.filter(
+          (note) => note.dish_id == id
+          // relevantCollections.includes(note.collection_id)
+        );
         setNotesList(filteredNotes.reverse());
       });
   }, []);
@@ -45,7 +56,9 @@ export default function DishDetail({ dishes, collections }) {
   }
 
   const notesToDisplay = notesList.map((note) => {
-    return <Text pb="1">{note.notes}</Text>;
+    if (relevantCollections.includes(note.collection_id)) {
+      return <Text pb="1">{note.notes}</Text>;
+    }
   });
 
   const ingredientList = dish.quantities.map((quantity) => {

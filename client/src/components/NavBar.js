@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import {
   Box,
@@ -25,7 +26,7 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 
-export default function NavBar({ collections, user }) {
+export default function NavBar({ collections, user, setUser }) {
   const { isOpen, onToggle } = useDisclosure();
   const userCollections = collections.map((collection) => {
     return {
@@ -34,7 +35,23 @@ export default function NavBar({ collections, user }) {
     };
   });
 
+  const history = useHistory();
+  function handleLogOut() {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+        history.push("/");
+      }
+    });
+  }
+
   const NAV_ITEMS = [
+    {
+      label: "Home",
+      href: "/",
+    },
     ...(user
       ? [
           {
@@ -42,16 +59,25 @@ export default function NavBar({ collections, user }) {
             href: "/collections",
             children: userCollections,
           },
+          {
+            label: "Add Recipe",
+            href: "/add-recipe",
+          },
         ]
-      : []),
-    {
-      label: "Home",
-      href: "/",
-    },
-    {
-      label: "Add Recipe",
-      href: "/add-recipe",
-    },
+      : [
+          {
+            label: "Add Recipe",
+            href: "/signup",
+          },
+        ]),
+    // {
+    //   label: "Home",
+    //   href: "/",
+    // },
+    // {
+    //   label: "Add Recipe",
+    //   href: "/add-recipe",
+    // },
   ];
 
   return (
@@ -110,23 +136,24 @@ export default function NavBar({ collections, user }) {
             spacing={6}
           >
             {user ? (
-              <NavLink to="/logout">
-                <Button
-                  as={"a"}
-                  display={{ base: "none", md: "inline-flex" }}
-                  fontSize={"sm"}
-                  fontWeight={600}
-                  color={"white"}
-                  bg={"orange.400"}
-                  href={"#"}
-                  _hover={{
-                    bg: "orange.300",
-                  }}
-                >
-                  Logout
-                </Button>
-              </NavLink>
+              // <NavLink to="/logout">
+              <Button
+                as={"a"}
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"white"}
+                bg={"orange.400"}
+                href={"#"}
+                _hover={{
+                  bg: "orange.300",
+                }}
+                onClick={handleLogOut}
+              >
+                Logout
+              </Button>
             ) : (
+              // </NavLink>
               <>
                 <NavLink to="/login">
                   <Button

@@ -43,7 +43,7 @@ function App() {
   return (
     <ChakraProvider>
       <Router>
-        <NavBar collections={collections} user={user} />
+        <NavBar collections={collections} user={user} setUser={setUser} />
         <Route path="/login">
           <Login
             user={user}
