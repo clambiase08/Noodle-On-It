@@ -8,7 +8,7 @@ import DishDetail from "./DishDetail";
 import CollectionDetail from "./CollectionDetail";
 import AddCollection from "./AddCollection";
 
-export default function Main({ collections }) {
+export default function Main({ collections, user, setCollections }) {
   const [dishes, setDishes] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -51,7 +51,11 @@ export default function Main({ collections }) {
           <AddRecipe ingredientList={ingredientList} />
         </Route>
         <Route path="/add-collection">
-          <AddCollection />
+          <AddCollection
+            collections={collections}
+            user={user}
+            setCollections={setCollections}
+          />
         </Route>
       </Switch>
     </div>

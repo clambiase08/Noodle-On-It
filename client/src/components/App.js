@@ -54,7 +54,11 @@ function App() {
           <Signup user={user} setUser={setUser} />
         </Route>
         <Route path="/">
-          <Main collections={collections} />
+          <Main
+            collections={collections}
+            user={user}
+            setCollections={setCollections}
+          />
         </Route>
       </Router>
     </ChakraProvider>
