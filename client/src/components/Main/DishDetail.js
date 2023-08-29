@@ -17,6 +17,7 @@ import IngredientList from "./IngredientList";
 export default function DishDetail({ dishes }) {
   const { id } = useParams();
   const dish = dishes.find((dish) => dish.id === parseInt(id));
+  console.log(dish);
 
   if (!dish) {
     return <div>Dish not found</div>;
@@ -38,11 +39,7 @@ export default function DishDetail({ dishes }) {
       <GridItem colSpan={1}>
         <Card>
           <CardBody>
-            <Image
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              alt={dish.dish_name}
-              borderRadius="lg"
-            />
+            <Image src={dish.image} alt={dish.dish_name} borderRadius="lg" />
             <Stack mt="6" spacing="3">
               <Heading size="md">{dish.dish_name}</Heading>
               <Text>
