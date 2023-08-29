@@ -35,7 +35,7 @@ export default function NavBar({ collections, user }) {
   });
 
   const NAV_ITEMS = [
-    ...(!user // need to change to user once we figure out passing down user from App
+    ...(user
       ? [
           {
             label: "Your Collections",
@@ -50,7 +50,7 @@ export default function NavBar({ collections, user }) {
     },
     {
       label: "Add Recipe",
-      href: "#",
+      href: "/add-recipe",
     },
   ];
 
