@@ -115,7 +115,7 @@ api.add_resource(Ingredients, "/ingredients")
 
 class Collections(Resource):
     def get(self):
-        collections = [c.to_dict(rules=("-user",)) for c in Collection.query.all()]
+        collections = [c.to_dict(rules=("-user","-notes.dish.quantities.ingredient.quantities")) for c in Collection.query.all()]
         return make_response(collections, 200)
 
 

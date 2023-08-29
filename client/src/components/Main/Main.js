@@ -19,7 +19,7 @@ export default function Main() {
   useEffect(() => {
     fetch("/collections")
       .then((res) => res.json())
-      .then((collections) => setDishes(collections));
+      .then((collections) => setCollections(collections));
   }, []);
 
   return (
@@ -32,7 +32,9 @@ export default function Main() {
           <DishDetail dishes={dishes} />
         </Route>
         <Route path="/collections" component={Collections} />
-        <Route path="/shopping-list/:id" component={ShoppingList} />
+        <Route path="/shopping-list/:id">
+          <ShoppingList collections={collections} />
+        </Route>
         <Route path="/add-recipe" component={AddRecipe} />
       </Switch>
     </div>
