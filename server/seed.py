@@ -19,7 +19,7 @@ if __name__ == "__main__":
         Quantity.query.delete()
         Dish.query.delete()
         Collection.query.delete()
-        User.query.delete()
+        # User.query.delete()
         Note.query.delete()
 
         fake = Faker()

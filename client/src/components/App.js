@@ -17,7 +17,7 @@ function App() {
         r.json().then((user) => setUser(user));
       }
     });
-  });
+  }, []);
 
   return (
     <ChakraProvider>
@@ -32,7 +32,9 @@ function App() {
         <Route path="/signup">
           <Signup username={username} setUsername={setUsername} />
         </Route>
-        <Route component={Main} />
+        <Route path="/">
+          <Main />
+        </Route>
       </Router>
     </ChakraProvider>
   );
