@@ -99,6 +99,9 @@ class Dishes(Resource):
             for dish in Dish.query.all()
         ]
         return make_response(dishes, 200)
+    def post (self):
+        # dish = 
+        pass
 
 
 api.add_resource(Dishes, "/dishes")
