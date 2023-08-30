@@ -13,18 +13,23 @@ function App() {
   const [collections, setCollections] = useState([]);
 
   useEffect(() => {
-    fetch("/check_session").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
+    fetchUser();
+    fetchCollections();
   }, []);
 
-  useEffect(() => {
+  const fetchCollections = () =>
     fetch("/collections")
       .then((res) => res.json())
       .then((collections) => setCollections(collections));
-  }, []);
+
+  const fetchUser = () =>
+    fetch("/check_session").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => {
+          setUser(user);
+        });
+      }
+    });
 
   return (
     <ChakraProvider>

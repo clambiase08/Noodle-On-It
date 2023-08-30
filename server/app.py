@@ -146,8 +146,32 @@ class Collections(Resource):
         ]
         return make_response(collections, 200)
 
+    def post(self):
+        data = request.get_json()
+        try:
+            new_coll = Collection(**data)
+        except ValueError as e:
+            abort(422, e.args[0])
+        db.session.add(new_coll)
+        db.session.commit()
+
+        return make_response(new_coll.to_dict(), 201)
+
 
 api.add_resource(Collections, "/collections")
+
+
+class CollectionById(Resource):
+    def delete(self, id):
+        collection = Collection.query.filter_by(id=id).first()
+        if not collection:
+            return make_response({"error": "Collection not found"}, 404)
+        db.session.delete(collection)
+        db.session.commit()
+        return make_response({}, 204)
+
+
+api.add_resource(CollectionById, "/collection/<int:id>")
 
 
 class Notes(Resource):
@@ -178,6 +202,23 @@ class Quantities(Resource):
 
 
 api.add_resource(Quantities, "/quantities")
+
+
+class Users(Resource):
+    def get(self):
+        users = [
+            user.to_dict(
+                rules=(
+                    "-collections",
+                    "-dishes",
+                )
+            )
+            for user in User.query.all()
+        ]
+        return make_response(users, 200)
+
+
+api.add_resource(Users, "/users")
 
 
 if __name__ == "__main__":

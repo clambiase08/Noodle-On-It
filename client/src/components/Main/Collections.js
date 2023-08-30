@@ -24,6 +24,10 @@ export default function Collections({ collections }) {
     );
   });
 
+  const handleClickAdd = () => {
+    history.push("/add-collection");
+  };
+
   return (
     <>
       <Text
@@ -40,7 +44,7 @@ export default function Collections({ collections }) {
       <SimpleGrid columns={3} spacing={4} mt="10">
         {collectionList}
       </SimpleGrid>
-      <Button>Add Collection</Button>
+      <Button onClick={handleClickAdd}>Add Collection</Button>
     </>
   );
 }
