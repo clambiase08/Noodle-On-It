@@ -16,6 +16,9 @@ export default function SearchBar({ onSearch }) {
       onChange={handleSearchChange}
       placeholder="Search for chicken tikka masala..."
       mb="5"
+      focusBorderColor="orange.300"
+      color="orange.500"
+      _placeholder={{ color: "inherit" }}
     />
   );
 }

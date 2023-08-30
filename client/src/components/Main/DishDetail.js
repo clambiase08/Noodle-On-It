@@ -166,7 +166,7 @@ export default function DishDetail({ dishes, collections }) {
         >
           Ingredients
         </Text>
-        {ingredientList}
+        <Box mt="5">{ingredientList}</Box>
       </GridItem>
       <GridItem colSpan={2}>
         <Text
@@ -187,7 +187,7 @@ export default function DishDetail({ dishes, collections }) {
           width="357px"
           maxWidth="100%"
         >
-          {dish.instructions}
+          <Box mt="5">{dish.instructions}</Box>
         </Text>
       </GridItem>
       <GridItem colSpan={5} ml="10">
