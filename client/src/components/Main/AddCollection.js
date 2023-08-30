@@ -1,5 +1,11 @@
 import React from "react";
+import AddCollectionForm from "./AddCollectionForm";
 
 export default function AddCollection() {
-  return <div>AddCollection</div>;
+  return (
+    <div>
+      <h1>Add Collection</h1>
+      <AddCollectionForm />
+    </div>
+  );
 }

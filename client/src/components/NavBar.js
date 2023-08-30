@@ -106,34 +106,55 @@ export default function NavBar({ collections, user }) {
             direction={"row"}
             spacing={6}
           >
-            <NavLink to="/login">
-              <Button
-                as={"a"}
-                fontSize={"sm"}
-                verticalAlign={"bottom"}
-                fontWeight={400}
-                variant={"link"}
-                href={"#"}
-              >
-                Sign In
-              </Button>
-            </NavLink>
-            <NavLink to="/signup">
-              <Button
-                as={"a"}
-                display={{ base: "none", md: "inline-flex" }}
-                fontSize={"sm"}
-                fontWeight={600}
-                color={"white"}
-                bg={"pink.400"}
-                href={"#"}
-                _hover={{
-                  bg: "pink.300",
-                }}
-              >
-                Sign Up
-              </Button>
-            </NavLink>
+            {user ? (
+              <NavLink to="/logout">
+                <Button
+                  as={"a"}
+                  display={{ base: "none", md: "inline-flex" }}
+                  fontSize={"sm"}
+                  fontWeight={600}
+                  color={"white"}
+                  bg={"pink.400"}
+                  href={"#"}
+                  _hover={{
+                    bg: "pink.300",
+                  }}
+                >
+                  Logout
+                </Button>
+              </NavLink>
+            ) : (
+              <>
+                <NavLink to="/login">
+                  <Button
+                    as={"a"}
+                    fontSize={"sm"}
+                    verticalAlign={"bottom"}
+                    fontWeight={400}
+                    variant={"link"}
+                    href={"#"}
+                  >
+                    Sign In
+                  </Button>
+                </NavLink>
+                <NavLink to="/signup">
+                  <Button
+                    as={"a"}
+                    display={{ base: "none", md: "inline-flex" }}
+                    fontSize={"sm"}
+                    fontWeight={600}
+                    color={"white"}
+                    bg={"pink.400"}
+                    href={"#"}
+                    _hover={{
+                      bg: "pink.300",
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                </NavLink>
+              </>
+            )}
           </Stack>
         </Flex>
         <Collapse in={isOpen} animateOpacity></Collapse>
