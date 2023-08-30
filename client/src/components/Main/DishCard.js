@@ -8,21 +8,22 @@ import {
   Center,
 } from "@chakra-ui/react";
 
-export default function DishCard({ name, image, user, onClick }) {
+export default function DishCard({ name, image, user, onClick, displayUser }) {
+  console.log(image);
   return (
     <CardBody onClick={onClick}>
       <Center>
         <Image
-          src={image}
+          src={`http://localhost:4000/${image}`}
           alt={name}
           borderRadius="lg"
-          boxSize="sm"
+          boxSize="xs"
           objectFit="cover"
         />
       </Center>
       <Stack mt="6" spacing="3">
         <Heading size="md">{name}</Heading>
-        <Text>Added by @{user}</Text>
+        {displayUser ? <Text>Added by @{user}</Text> : ""}
       </Stack>
     </CardBody>
   );

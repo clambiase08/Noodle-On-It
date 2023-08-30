@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Input } from "@chakra-ui/react";
 
 export default function SearchBar({ onSearch }) {
   const [search, setSearch] = useState("");
@@ -9,11 +10,12 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <input
+    <Input
       type="text"
       value={search}
       onChange={handleSearchChange}
       placeholder="Search for chicken tikka masala..."
+      mb="5"
     />
   );
 }

@@ -31,6 +31,7 @@ export default function Home({ dishes, loading }) {
           name={dish.dish_name}
           user={dish.user.username}
           onClick={handleClick}
+          displayUser={true}
         />
       </Card>
     );
@@ -39,7 +40,7 @@ export default function Home({ dishes, loading }) {
   return (
     <Box as="main" mt="20">
       <SearchBar onSearch={handleSearch} />
-      <SimpleGrid columns={3} spacing={4}>
+      <SimpleGrid columns={4} spacing={4}>
         {loading ? <p>Loading...</p> : dishList}
       </SimpleGrid>
     </Box>
