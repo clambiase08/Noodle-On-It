@@ -15,7 +15,37 @@ export default function CollectionCard({
   name,
   onClick,
   onClickCollection,
+  id,
 }) {
+  function handleEdit(e) {
+    // console.log(id);
+    let x = true;
+    while (x) {
+      if (e.target.innerHTML === "all" || e.target.innerHTML === "favorite") {
+        console.log("try again");
+        x = false;
+      } else {
+        fetch(`/collections/${id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: e.target.innerHTML }),
+        });
+        x = false;
+      }
+    }
+  }
+  let nameJSX;
+  if (name === "all" || name === "favorite") {
+    nameJSX = <Heading size="md">{name}</Heading>;
+  } else {
+    nameJSX = (
+      <Heading size="md" contentEditable onBlur={handleEdit}>
+        {name}
+      </Heading>
+    );
+  }
   return (
     <Card>
       <CardBody>
@@ -29,7 +59,10 @@ export default function CollectionCard({
           />
         </Center>
         <Stack mt="6" spacing="3">
-          <Heading size="md">{name}</Heading>
+          {/* <Heading size="md" contentEditable onBlur={handleEdit}>
+            {name}
+          </Heading> */}
+          {nameJSX}
         </Stack>
       </CardBody>
       <CardFooter>

@@ -171,9 +171,19 @@ class CollectionById(Resource):
         db.session.delete(collection)
         db.session.commit()
         return make_response({}, 204)
+    def patch(self,id):
+        data = request.get_json()
+        collection = Collection.query.filter(Collection.id == id).first()
+        if not collection:
+            abort(404, "cannot find user id")
+        for key in data:
+            setattr(collection,key,data[key])
+        db.session.add(collection)
+        db.session.commit() 
+        return make_response(collection.to_dict(),202)
 
 
-api.add_resource(CollectionById, "/collection/<int:id>")
+api.add_resource(CollectionById, "/collections/<int:id>")
 
 
 class Notes(Resource):

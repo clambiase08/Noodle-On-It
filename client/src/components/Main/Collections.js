@@ -16,6 +16,7 @@ export default function Collections({ collections }) {
     return (
       <CollectionCard
         key={collection.id}
+        id={collection.id}
         image={collection.image}
         name={collection.name}
         onClick={handleClick}
