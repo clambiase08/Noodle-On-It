@@ -91,7 +91,9 @@ export default function NavBar({ collections, user }) {
               <Text
                 textAlign={useBreakpointValue({ base: "center", md: "left" })}
                 fontFamily={"heading"}
-                color={useColorModeValue("gray.800", "white")}
+                color={useColorModeValue("orange.400", "white")}
+                fontWeight={"bold"}
+                fontSize={"20"}
               >
                 Noodle On It
               </Text>
