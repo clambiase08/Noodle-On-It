@@ -49,7 +49,7 @@ class Signup(Resource):
         db.session.commit()
 
         # return new_user.to_dict()
-        return new_user.to_dict(only=("username",))
+        return new_user.to_dict()
 
 
 api.add_resource(Signup, "/signup")
@@ -110,7 +110,7 @@ class Dishes(Resource):
                 instructions=data["instructions"],
                 time_to_cook=data["time_to_cook"],
                 time_to_prepare=data["time_to_prepare"],
-                image=None,
+                image="images/table-food.jpg" if not data["image"] else data["image"],
                 user_id=session["user_id"],
             )
         except ValueError as e:
