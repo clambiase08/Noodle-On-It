@@ -11,6 +11,7 @@ export default function Main({ collections }) {
   const [dishes, setDishes] = useState([]);
 
   const [loading, setLoading] = useState(true);
+  const [ingredientList, setIngredientList] = useState([]);
 
   useEffect(() => {
     fetch("/dishes")
@@ -19,6 +20,12 @@ export default function Main({ collections }) {
         setDishes(dishes);
         setLoading(false);
       });
+  }, []);
+
+  useEffect(() => {
+    fetch("/ingredients")
+      .then((res) => res.json())
+      .then((ingredients) => setIngredientList(ingredients));
   }, []);
 
   return (
@@ -36,8 +43,12 @@ export default function Main({ collections }) {
         <Route path="/collections/:id">
           <CollectionDetail collections={collections} />
         </Route>
-        <Route path="/shopping-list/:id" component={ShoppingList} />
-        <Route path="/add-recipe" component={AddRecipe} />
+        <Route path="/shopping-list/:id">
+          <ShoppingList collections={collections} />
+        </Route>
+        <Route path="/add-recipe">
+          <AddRecipe ingredientList={ingredientList} />
+        </Route>
       </Switch>
     </div>
   );

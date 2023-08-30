@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, make_response, session
+from flask import request, make_response, session, abort
 from flask_restful import Resource
 from models import *
 from werkzeug.exceptions import Unauthorized
@@ -100,6 +100,26 @@ class Dishes(Resource):
         ]
         return make_response(dishes, 200)
 
+    def post(self):
+        data = request.get_json()
+        try:
+            new_dish = Dish(
+                dish_name=data["dish_name"],
+                instructions=data["instructions"],
+                time_to_cook=data["time_to_cook"],
+                time_to_prepare=data["time_to_prepare"],
+                image=None,
+                user_id=session["user_id"],
+            )
+        except ValueError as e:
+            abort(422, e.args[0])
+        db.session.add(new_dish)
+        db.session.commit()
+
+        return make_response(
+            new_dish.to_dict(rules=("-quantities.ingredient.quantities",)), 201
+        )
+
 
 api.add_resource(Dishes, "/dishes")
 
@@ -137,6 +157,27 @@ class Notes(Resource):
 
 
 api.add_resource(Notes, "/notes")
+
+
+class Quantities(Resource):
+    def post(self):
+        data = request.get_json()
+        try:
+            new_quant = Quantity(
+                quantity=data["quantity"],
+                measurement=data["measurement"],
+                dish_id=data["dish_id"],
+                ingredient_id=data["ingredient_id"],
+            )
+        except ValueError as e:
+            abort(422, e.args[0])
+        db.session.add(new_quant)
+        db.session.commit()
+
+        return make_response(new_quant.to_dict(), 201)
+
+
+api.add_resource(Quantities, "/quantities")
 
 
 if __name__ == "__main__":

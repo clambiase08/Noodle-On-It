@@ -157,7 +157,9 @@ if __name__ == "__main__":
         #     db.session.commit()
 
         note_list = []
-        for _ in range(len(dish_list)):
+        for _ in range(100):
+        # for _ in range(len(dish_list)):
+            
             collection_id = randint(1, 5)
             dish_id = randint(1, 10)
             # notes = f"{fake.sentence()}"
@@ -426,7 +428,9 @@ if __name__ == "__main__":
         ]
 
         quantity_list = []
-        for _ in range(len(dish_list)):
+        for _ in range(10):
+        # for _ in range(len(dish_list)):
+
             measurement = measurement_list[randint(0, (len(measurement_list)) - 1)]
             quantity = randint(1, 20)
             dish_id = randint(1, 10)
