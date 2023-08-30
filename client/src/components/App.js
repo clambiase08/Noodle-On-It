@@ -14,19 +14,28 @@ function App() {
 
   useEffect(() => {
     fetchUser();
-    fetchCollections();
+    // fetchCollections();
   }, []);
 
-  const fetchCollections = () =>
-    fetch("/collections")
+  const fetchCollections = (id) =>
+    // fetch(`/collections?user_id=${id}`)
+    fetch(`/collections`)
       .then((res) => res.json())
-      .then((collections) => setCollections(collections));
+      .then((collections) => {
+        const filteredCollections = collections.filter(
+          (collections) => collections.user_id === parseInt(id)
+        );
+        setCollections(filteredCollections);
+        console.log(filteredCollections);
+      });
 
   const fetchUser = () =>
     fetch("/check_session").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
           setUser(user);
+          console.log(user);
+          fetchCollections(user.id);
         });
       }
     });
@@ -36,7 +45,7 @@ function App() {
       <Router>
         <NavBar collections={collections} user={user} />
         <Route path="/login">
-          <Login username={username} setUsername={setUsername} />
+          <Login user={user} setUser={setUser} />
         </Route>
         <Route path="/logout">
           <Logout setUser={setUser} />

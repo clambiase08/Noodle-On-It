@@ -131,7 +131,7 @@ export default function AddRecipeForm({ ingredientList }) {
                     console.log("quantity good!");
                     console.log(quantity);
                     history.push("/");
-                    // window.location.reload();
+                    window.location.reload();
                   });
                 } else {
                   r.json().then((error) => {
