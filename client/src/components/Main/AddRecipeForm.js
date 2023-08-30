@@ -86,6 +86,7 @@ export default function AddRecipeForm({ ingredientList }) {
     instructions: yup.string().required("Please add instructions"),
     time_to_cook: yup.number().required("Please enter a time to cook"),
     time_to_prepare: yup.number().required("Please enter a time to prepare"),
+    image: yup.string(),
   });
 
   const formik = useFormik({
@@ -94,6 +95,7 @@ export default function AddRecipeForm({ ingredientList }) {
       instructions: "",
       time_to_cook: "",
       time_to_prepare: "",
+      image: "",
     },
     validationSchema: formSchema,
     onSubmit: (value) => {
@@ -210,6 +212,14 @@ export default function AddRecipeForm({ ingredientList }) {
           style={{ margin: "30px", border: "1px solid" }}
         />
         <button type="submit">Add Dish</button>
+        <label>Image</label>
+        <input
+          type="string"
+          name="image"
+          value={formik.values.image}
+          onChange={formik.handleChange}
+          style={{ margin: "30px", border: "1px solid" }}
+        />
       </form>
       <form onSubmit={formik2.handleSubmit} style={{ margin: "30px" }}>
         <label>Ingredient List</label>
