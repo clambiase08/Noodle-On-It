@@ -22,7 +22,7 @@ export default function DishCard({ name, image, user, onClick }) {
       </Center>
       <Stack mt="6" spacing="3">
         <Heading size="md">{name}</Heading>
-        <Text>{user}</Text>
+        <Text>Added by @{user}</Text>
       </Stack>
     </CardBody>
   );
