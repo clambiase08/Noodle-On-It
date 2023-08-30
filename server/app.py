@@ -180,7 +180,20 @@ class Notes(Resource):
     def get(self):
         notes = [note.to_dict() for note in Note.query.all()]
         return make_response(notes, 200)
+    def post(self):
+        data = request.get_json()
+        try:
+            new_note = Note(
+                notes = data['notes'],
+                collection_id = data['collection_id'],
+                dish_id = data['dish_id']
+            )
+        except ValueError as e:
+            abort(422, e.args[0])
+        db.session.add(new_note)
+        db.session.commit()
 
+        return make_response(new_note.to_dict(), 201)
 
 api.add_resource(Notes, "/notes")
 

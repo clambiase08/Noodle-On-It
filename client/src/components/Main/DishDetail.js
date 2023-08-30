@@ -19,6 +19,17 @@ import IngredientList from "./IngredientList";
 
 export default function DishDetail({ dishes, collections }) {
   const [toggleNote, setToggleNote] = useState(false);
+  const [notesList, setNotesList] = useState([]);
+
+  console.log(notesList);
+  useEffect(() => {
+    fetch("/notes")
+      .then((r) => r.json())
+      .then((notes) => {
+        const filteredNotes = notes.filter((note) => note.dish_id == id);
+        setNotesList(filteredNotes.reverse());
+      });
+  }, []);
 
   function handleToggleNote(e) {
     setToggleNote(!toggleNote);
@@ -30,6 +41,15 @@ export default function DishDetail({ dishes, collections }) {
   if (!dish) {
     return <div>Dish not found</div>;
   }
+
+  const notesToDisplay = notesList.map((note) => {
+    return (
+      <div>
+        <p>{note.notes}</p>
+        <br />
+      </div>
+    );
+  });
 
   const ingredientList = dish.quantities.map((quantity) => {
     return (
@@ -45,16 +65,45 @@ export default function DishDetail({ dishes, collections }) {
   const collectionsDropdown = collections.map((collection) => {
     return (
       <option key={collection.id} value={collection.id}>
-        {collection.id}. {collection.name}
+        {collection.name}
       </option>
     );
   });
-  console.log(collectionsDropdown);
+
+  function handlePostNote(value) {
+    const new_note = {
+      notes: value["notes"],
+      collection_id: value["collection"],
+      dish_id: `${id}`,
+    };
+    fetch("/notes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(new_note),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((note) => {
+          console.log("good!");
+          console.log(note);
+          const notesToSpread = [...notesList];
+          notesToSpread.unshift(note);
+          setNotesList(notesToSpread);
+        });
+      } else {
+        r.json().then((error) => {
+          console.log("no good");
+          console.log(error);
+        });
+      }
+    });
+  }
 
   const noteForm = (
     <Formik
-      initialValues={{ notes: "", collection: `` }}
-      onSubmit={(value) => console.log(value)}
+      initialValues={{ notes: "", collection: `${collections[0]?.id}` }}
+      onSubmit={(value) => handlePostNote(value)}
     >
       {(props) => (
         <form onSubmit={props.handleSubmit}>
@@ -72,6 +121,7 @@ export default function DishDetail({ dishes, collections }) {
             name="collection"
             onChange={props.handleChange}
             w={"200px"}
+            required
           >
             {collectionsDropdown}
           </Select>
@@ -138,6 +188,7 @@ export default function DishDetail({ dishes, collections }) {
         </button>
         {toggleNote ? noteForm : null}
       </div>
+      <div>{notesToDisplay}</div>
     </Grid>
   );
 }
