@@ -9,8 +9,6 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 
-// http://localhost:4000/images/spaghetti.png
-
 import {
   Box,
   Text,
@@ -29,23 +27,13 @@ export default function DishDetail({ dishes, collections, user }) {
   const [toggleNote, setToggleNote] = useState(false);
   const [notesList, setNotesList] = useState([]);
 
-  // console.log(collections);
   const relevantCollections = collections.map((collection) => collection.id);
   console.log(relevantCollections);
   useEffect(() => {
     fetch("/notes")
       .then((r) => r.json())
       .then((notes) => {
-        // console.log(notes);
-        // const relevantCollections = collections.map(
-        //   (collection) => collection.id
-        // );
-        // console.log(relevantCollections);
-
-        const filteredNotes = notes.filter(
-          (note) => note.dish_id == id
-          // relevantCollections.includes(note.collection_id)
-        );
+        const filteredNotes = notes.filter((note) => note.dish_id == id);
         setNotesList(filteredNotes.reverse());
       });
   }, []);

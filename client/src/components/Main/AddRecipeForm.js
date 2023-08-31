@@ -158,95 +158,9 @@ export default function AddRecipeForm({ ingredientList }) {
     },
     validationSchema: formSchema2,
     onSubmit: (value) => {
-      // console.log(value);
       setDisplayIngredients([...displayIngredients, value]);
     },
   });
-
-  //   return (
-  //     <div>
-  //       {/* <h2>Welcome to the add recipe</h2> */}
-  //       <br />
-  //       <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
-  //         <label>Recipe Name</label>
-  //         <input
-  //           type="text"
-  //           name="dish_name"
-  //           value={formik.values.dish_name}
-  //           onChange={formik.handleChange}
-  //           style={{ margin: "30px", border: "1px solid" }}
-  //         />
-  //         <label>Instructions</label>
-  //         <textarea
-  //           type="paragraph"
-  //           name="instructions"
-  //           value={formik.values.instructions}
-  //           onChange={formik.handleChange}
-  //           style={{ border: "1px solid" }}
-  //         />
-  //         <label>Time to Cook</label>
-  //         <input
-  //           type="number"
-  //           name="time_to_cook"
-  //           value={formik.values.time_to_cook}
-  //           onChange={formik.handleChange}
-  //           style={{ margin: "30px", border: "1px solid" }}
-  //         />
-  //         <label>Time to Prepare</label>
-  //         <input
-  //           type="number"
-  //           name="time_to_prepare"
-  //           value={formik.values.time_to_prepare}
-  //           onChange={formik.handleChange}
-  //           style={{ margin: "30px", border: "1px solid" }}
-  //         />
-  //         <button type="submit">Add Dish</button>
-  //         <label>Image</label>
-  //         <input
-  //           type="string"
-  //           name="image"
-  //           value={formik.values.image}
-  //           onChange={formik.handleChange}
-  //           style={{ margin: "30px", border: "1px solid" }}
-  //         />
-  //       </form>
-  //       <form onSubmit={formik2.handleSubmit} style={{ margin: "30px" }}>
-  //         <label>Ingredient List</label>
-  //         <Select
-  //           type="string"
-  //           name="ingredient"
-  //           onChange={formik2.handleChange}
-  //           w={"200px"}
-  //         >
-  //           {ingDropDown}
-  //         </Select>
-  //         <label>Quantity</label>
-  //         <input
-  //           type="number"
-  //           name="quantity"
-  //           value={formik2.values.quantity}
-  //           style={{ margin: "30px", border: "1px solid" }}
-  //           onChange={formik2.handleChange}
-  //           required
-  //         />
-  //         <label>Measurement</label>
-  //         <Select
-  //           type="string"
-  //           name="measurement"
-  //           onChange={formik2.handleChange}
-  //           w={"200px"}
-  //         >
-  //           {measurementDropDown}
-  //         </Select>
-  //         <button type="submit">Add Ingredient</button>
-  //       </form>
-  //       <li>{ingredientsAdded}</li>
-  //     </div>
-  //   );
-  // }
-
-  // export default function SignupCard() {
-  // const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Flex
@@ -309,22 +223,6 @@ export default function AddRecipeForm({ ingredientList }) {
                   />
                 </FormControl>
               </Box>
-              {/* <Stack spacing={10} pt={2}>
-                <Button
-                  loadingText="Submitting"
-                  size="lg"
-                  bg={"orange.400"}
-                  color={"white"}
-                  _hover={{
-                    bg: "orange.500",
-                  }}
-                  type="submit"
-                >
-                  Add Dish
-                </Button>
-              </Stack> */}
-              {/* </form> */}
-              {/* <form> */}
               <div>
                 <Stack align={"center"}>
                   <Box>Add Ingredients!</Box>
@@ -380,9 +278,7 @@ export default function AddRecipeForm({ ingredientList }) {
                         _hover={{
                           bg: "orange.500",
                         }}
-                        // type="submit"
                         type="button"
-                        // onSubmit={formik2.handleSubmit}
                         onClick={formik2.handleSubmit}
                       >
                         Add Ingredient
