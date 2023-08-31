@@ -51,7 +51,7 @@ export default function Home({ dishes, loading }) {
       >
         Explore Recipes
       </Text>
-      <SimpleGrid columns={4} spacing={4}>
+      <SimpleGrid px={"10"} columns={6} spacing={4}>
         {loading ? <p>Loading...</p> : dishList}
       </SimpleGrid>
     </Box>

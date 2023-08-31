@@ -403,6 +403,38 @@ if __name__ == "__main__":
             "Noni fruit",
             "Durian",
             "Sapodilla",
+            "Dried oregano",
+            "Dried basil",
+            "Canned tomatoes",
+            "Spaghetti",
+            "Assorted vegetables",
+            "Stir-fry sauce",
+            "Cooked rice",
+            "Curry paste",
+            "Assorted vegetables",
+            "Cooked rice or naan",
+            "Bread slices",
+            "Cheese slices",
+            "Lettuce",
+            "Croutons",
+            "Parmesan",
+            "Dressing ingredients",
+            "Grilled chicken",
+            "Vanilla extract",
+            "Pizza dough",
+            "Pizza sauce",
+            "Cheese",
+            "Assorted pizza toppings",
+            "Assorted fruits",
+            "Yogurt",
+            "Juice",
+            "Honey",
+            "Taco seasoning",
+            "Water",
+            "Taco shells",
+            "Coconut milk",
+            "Chocolate",
+            "Heavy cream",
         ]
 
         for ingredient in ingredient_list:
@@ -427,21 +459,208 @@ if __name__ == "__main__":
             "",
         ]
 
-        quantity_list = []
-        for _ in range(10):
-            # for _ in range(len(dish_list)):
+        # quantity_list = []
+        # for _ in range(10):
+        #     # for _ in range(len(dish_list)):
 
-            measurement = measurement_list[randint(0, (len(measurement_list)) - 1)]
-            quantity = randint(1, 20)
-            dish_id = randint(1, 10)
-            ingredient_id = randint(1, len(ingredient_list))
+        #     measurement = measurement_list[randint(0, (len(measurement_list)) - 1)]
+        #     quantity = randint(1, 20)
+        #     dish_id = randint(1, 10)
+        #     ingredient_id = randint(1, len(ingredient_list))
 
+        quantity_list = [
+            {"ingredient": 3, "measurement": "tbsp", "quantity": 2, "dish_id": 1},
+            {"ingredient": 5, "measurement": "medium", "quantity": 1, "dish_id": 1},
+            {
+                "ingredient": 4,
+                "measurement": "cloves",
+                "quantity": 3,
+                "dish_id": 1,
+            },
+            {"ingredient": 43, "measurement": "lb", "quantity": 1, "dish_id": 1},
+            {
+                "ingredient": 234,
+                "measurement": "C",
+                "quantity": 2,
+                "dish_id": 1,
+            },
+            {
+                "ingredient": 232,
+                "measurement": "tsp",
+                "quantity": 1,
+                "dish_id": 1,
+            },
+            {
+                "ingredient": 233,
+                "measurement": "tsp",
+                "quantity": 1,
+                "dish_id": 1,
+            },
+            {"ingredient": 1, "measurement": "tsp", "quantity": 1, "dish_id": 1},
+            {
+                "ingredient": 120,
+                "measurement": "tsp",
+                "quantity": 1,
+                "dish_id": 1,
+            },
+            {"ingredient": 144, "measurement": "oz", "quantity": 12, "dish_id": 1},
+            {"ingredient": 7, "measurement": "lb", "quantity": 1, "dish_id": 2},
+            {"ingredient": 33, "measurement": "tbsp", "quantity": 2, "dish_id": 2},
+            {"ingredient": 3, "measurement": "tbsp", "quantity": 2, "dish_id": 2},
+            {
+                "ingredient": 236,
+                "measurement": "C",
+                "quantity": 2,
+                "dish_id": 2,
+            },
+            {
+                "ingredient": 237,
+                "measurement": "C",
+                "quantity": 0.5,
+                "dish_id": 2,
+            },
+            {"ingredient": 238, "measurement": "C", "quantity": 2, "dish_id": 2},
+            {"ingredient": 5, "measurement": "medium", "quantity": 1, "dish_id": 3},
+            {
+                "ingredient": 4,
+                "measurement": "cloves",
+                "quantity": 3,
+                "dish_id": 3,
+            },
+            {
+                "ingredient": 239,
+                "measurement": "tbsp",
+                "quantity": 2,
+                "dish_id": 3,
+            },
+            {
+                "ingredient": 236,
+                "measurement": "C",
+                "quantity": 2,
+                "dish_id": 3,
+            },
+            {"ingredient": 261, "measurement": "C", "quantity": 1, "dish_id": 3},
+            {
+                "ingredient": 238,
+                "measurement": "serving",
+                "quantity": 4,
+                "dish_id": 3,
+            },
+            {
+                "ingredient": 134,
+                "measurement": "slices",
+                "quantity": 2,
+                "dish_id": 4,
+            },
+            {"ingredient": 27, "measurement": "tbsp", "quantity": 1, "dish_id": 4},
+            {
+                "ingredient": 252,
+                "measurement": "slices",
+                "quantity": 2,
+                "dish_id": 4,
+            },
+            {"ingredient": 244, "measurement": "C", "quantity": 4, "dish_id": 5},
+            {"ingredient": 245, "measurement": "C", "quantity": 1, "dish_id": 5},
+            {"ingredient": 246, "measurement": "C", "quantity": 0.5, "dish_id": 5},
+            {
+                "ingredient": 247,
+                "measurement": "recipe",
+                "quantity": 1,
+                "dish_id": 5,
+            },
+            {
+                "ingredient": 248,
+                "measurement": "serving",
+                "quantity": 2,
+                "dish_id": 5,
+            },
+            {"ingredient": 27, "measurement": "C", "quantity": 1, "dish_id": 6},
+            {"ingredient": 262, "measurement": "oz", "quantity": 4, "dish_id": 6},
+            {"ingredient": 29, "measurement": "qty", "quantity": 3, "dish_id": 6},
+            {"ingredient": 31, "measurement": "C", "quantity": 2, "dish_id": 6},
+            {"ingredient": 30, "measurement": "C", "quantity": 1, "dish_id": 6},
+            {"ingredient": 1, "measurement": "tsp", "quantity": 0.5, "dish_id": 6},
+            {
+                "ingredient": 249,
+                "measurement": "tsp",
+                "quantity": 1,
+                "dish_id": 6,
+            },
+            {
+                "ingredient": 250,
+                "measurement": "dough ball",
+                "quantity": 1,
+                "dish_id": 7,
+            },
+            {"ingredient": 251, "measurement": "C", "quantity": 1, "dish_id": 7},
+            {"ingredient": 252, "measurement": "C", "quantity": 1, "dish_id": 7},
+            {
+                "ingredient": 253,
+                "measurement": "C",
+                "quantity": 1,
+                "dish_id": 7,
+            },
+            {
+                "ingredient": 254,
+                "measurement": "C",
+                "quantity": 1,
+                "dish_id": 8,
+            },
+            {"ingredient": 255, "measurement": "C", "quantity": 0.5, "dish_id": 8},
+            {"ingredient": 256, "measurement": "C", "quantity": 0.5, "dish_id": 8},
+            {
+                "ingredient": 257,
+                "measurement": "tbsp",
+                "quantity": 1,
+                "dish_id": 8,
+            },
+            {"ingredient": 43, "measurement": "lb", "quantity": 1, "dish_id": 9},
+            {
+                "ingredient": 258,
+                "measurement": "tbsp",
+                "quantity": 2,
+                "dish_id": 9,
+            },
+            {"ingredient": 259, "measurement": "C", "quantity": 0.5, "dish_id": 9},
+            {
+                "ingredient": 260,
+                "measurement": "count",
+                "quantity": 8,
+                "dish_id": 9,
+            },
+            {"ingredient": 244, "measurement": "C", "quantity": 1, "dish_id": 9},
+            {"ingredient": 252, "measurement": "C", "quantity": 1, "dish_id": 9},
+            {"ingredient": 49, "measurement": "C", "quantity": 0.5, "dish_id": 9},
+            {"ingredient": 10, "measurement": "oz", "quantity": 8, "dish_id": 10},
+            {"ingredient": 27, "measurement": "tbsp", "quantity": 2, "dish_id": 10},
+            {
+                "ingredient": 4,
+                "measurement": "cloves",
+                "quantity": 2,
+                "dish_id": 10,
+            },
+            {"ingredient": 263, "measurement": "C", "quantity": 1, "dish_id": 10},
+            {
+                "ingredient": 26,
+                "measurement": "C",
+                "quantity": 0.5,
+                "dish_id": 10,
+            },
+            {"ingredient": 1, "measurement": "tsp", "quantity": 0.5, "dish_id": 10},
+            {
+                "ingredient": 120,
+                "measurement": "tsp",
+                "quantity": 0.25,
+                "dish_id": 10,
+            },
+        ]
+        for q in quantity_list:
             quantity = Quantity(
-                measurement=measurement,
-                quantity=quantity,
-                dish_id=dish_id,
-                ingredient_id=ingredient_id,
+                measurement=q["measurement"],
+                quantity=q["quantity"],
+                dish_id=q["dish_id"],
+                ingredient_id=q["ingredient"],
             )
             db.session.add(quantity)
             db.session.commit()
-            quantity_list.append(quantity)
+            # quantity_list.append(quantity)
