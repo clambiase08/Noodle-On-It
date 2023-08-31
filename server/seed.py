@@ -2,6 +2,7 @@
 
 # Standard library imports
 from random import randint, choice as rc
+import random
 
 # Remote library imports
 from faker import Faker
@@ -18,8 +19,10 @@ if __name__ == "__main__":
         Ingredient.query.delete()
         Quantity.query.delete()
         Dish.query.delete()
-        Collection.query.delete()
+        # Collection.query.delete()
+        Collection.query.filter(Collection.id > 4).delete()
         # User.query.delete()
+        User.query.filter(User.id > 2).delete()
         Note.query.delete()
 
         fake = Faker()
@@ -160,7 +163,8 @@ if __name__ == "__main__":
         for _ in range(100):
             # for _ in range(len(dish_list)):
 
-            collection_id = randint(1, 5)
+            # collection_id = randint(1, 4)
+            collection_id = random.choice([1, 3])
             dish_id = randint(1, 10)
             # notes = f"{fake.sentence()}"
 
