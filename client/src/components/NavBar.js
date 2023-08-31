@@ -50,7 +50,7 @@ export default function NavBar({ collections, user }) {
     },
     {
       label: "Add Recipe",
-      href: "/add-recipe",
+      href: user ? "/add-recipe" : "/signup",
     },
   ];
 
