@@ -3,6 +3,7 @@
 # Standard library imports
 from random import randint, choice as rc
 import random
+import random
 
 # Remote library imports
 from faker import Faker
@@ -21,8 +22,8 @@ if __name__ == "__main__":
         Dish.query.delete()
         # Collection.query.delete()
         Collection.query.filter(Collection.id > 4).delete()
-        User.query.filter(User.id > 2).delete()
         # User.query.delete()
+        User.query.filter(User.id > 2).delete()
         Note.query.delete()
 
         fake = Faker()
@@ -165,7 +166,6 @@ if __name__ == "__main__":
 
             # collection_id = randint(1, 4)
             collection_id = random.choice([1, 3])
-
             dish_id = randint(1, 10)
             # notes = f"{fake.sentence()}"
 

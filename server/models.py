@@ -39,6 +39,12 @@ class User(db.Model, SerializerMixin):
         # return bcrypt.check_password_hash(password.encode("utf-8"),self._password_hash)
         return bcrypt.check_password_hash(self._password_hash, password.encode("utf-8"))
 
+    @validates(username, email)
+    def validate_signup(self, key, value):
+        if not len(value) > 0:
+            raise ValueError("Must provide at least one character to sign up")
+        return value
+
     collections = db.relationship("Collection", backref="user", cascade="delete")
     dishes = db.relationship("Dish", backref="user", cascade="delete")
     notes = association_proxy("dishes", "note")
