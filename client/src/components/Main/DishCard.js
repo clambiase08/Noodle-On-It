@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 export default function DishCard({ name, image, user, onClick, displayUser }) {
-  console.log(image);
+  // console.log(image);
   return (
     <CardBody onClick={onClick}>
       <Center>

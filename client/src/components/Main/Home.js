@@ -24,7 +24,7 @@ export default function Home({ dishes, loading }) {
       history.push(`/dish-details/${dish.id}`);
     };
     return (
-      <Card>
+      <Card key={dish.id}>
         <DishCard
           key={dish.id}
           image={dish.image}
@@ -48,10 +48,11 @@ export default function Home({ dishes, loading }) {
         maxWidth="100%"
         mb="20"
         textAlign={"center"}
+        mt="10"
       >
         Explore Recipes
       </Text>
-      <SimpleGrid columns={4} spacing={4}>
+      <SimpleGrid px={"40"} columns={4} spacing={4}>
         {loading ? <p>Loading...</p> : dishList}
       </SimpleGrid>
     </Box>
