@@ -93,11 +93,31 @@ export default function DishDetail({ dishes, collections, user }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((note) => {
-          console.log("good!");
-          console.log(note);
+          // console.log("good!");
+          // console.log(note);
           const notesToSpread = [...notesList];
           notesToSpread.unshift(note);
           setNotesList(notesToSpread);
+          if (note.collection_id !== relevantCollections[0]) {
+            const new_note_to_all = {
+              notes: value["notes"],
+              collection_id: relevantCollections[0],
+              dish_id: `${id}`,
+            };
+            fetch("/notes", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(new_note_to_all),
+            }).then((r) => {
+              if (r.ok) {
+                console.log("all good!");
+              }
+            });
+          }
+          // console.log(note.collection_id);
+          // console.log(relevantCollections[0]);
           window.location.reload();
         });
       } else {
