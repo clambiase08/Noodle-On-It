@@ -134,6 +134,7 @@ export default function Signup({ user, setUser, fetchUser }) {
                 value={username}
                 placeholder="Username"
                 onChange={(e) => setUsername(e.target.value)}
+                required
               />
               <ChakraInput
                 bg={"gray.100"}
@@ -146,6 +147,7 @@ export default function Signup({ user, setUser, fetchUser }) {
                 value={password}
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <ChakraInput
                 bg={"gray.100"}
@@ -158,6 +160,7 @@ export default function Signup({ user, setUser, fetchUser }) {
                 value={email}
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
               {/* <Button
                   fontFamily={"heading"}

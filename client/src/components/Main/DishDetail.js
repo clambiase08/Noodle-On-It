@@ -100,7 +100,8 @@ export default function DishDetail({ dishes, collections, user }) {
           setNotesList(notesToSpread);
           if (note.collection_id !== relevantCollections[0]) {
             const new_note_to_all = {
-              notes: value["notes"],
+              // notes: value["notes"],
+              notes: "",
               collection_id: relevantCollections[0],
               dish_id: `${id}`,
             };
