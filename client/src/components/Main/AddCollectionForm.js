@@ -1,6 +1,12 @@
 import React, { useState } from "react";
-import { Box, Button } from "@chakra-ui/react";
-import { Formik, FormikProps } from "formik";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+} from "@chakra-ui/react";
+import { Formik, Field } from "formik";
 import { useHistory } from "react-router";
 
 import Input from "./Input";
@@ -14,7 +20,6 @@ export default function AddCollectionForm({
   setCollections,
 }) {
   const history = useHistory();
-  const [errorMessage, setErrorMessage] = useState("");
 
   const AVATARS = [
     { name: "Salad", image: "images/salad-icon.png" },
@@ -38,42 +43,35 @@ export default function AddCollectionForm({
   });
 
   function handlePostCollection(value) {
-    if (value.name === "all") {
-      setErrorMessage("Collection name cannot be 'all'.");
-    } else if (value.avatar === "") {
-      setErrorMessage("Please choose an image for this collection");
-    } else {
-      const new_coll = {
-        name: value["name"],
-        image: value["avatar"],
-        user_id: `${user.id}`,
-      };
-      fetch("/collections", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(new_coll),
-      }).then((res) => {
-        if (res.ok) {
-          res.json().then((collection) => {
-            console.log(collection);
-            const updatedCollections = [...collections, collection];
-            setCollections(updatedCollections);
-            history.push("/collections");
-          });
-        } else {
-          res.json().then((error) => {
-            console.log(error);
-          });
-        }
-      });
-    }
+    const new_coll = {
+      name: value["name"],
+      image: value["avatar"],
+      user_id: `${user.id}`,
+    };
+    fetch("/collections", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(new_coll),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((collection) => {
+          console.log(collection);
+          const updatedCollections = [...collections, collection];
+          setCollections(updatedCollections);
+          history.push("/collections");
+        });
+      } else {
+        res.json().then((error) => {
+          console.log(error);
+        });
+      }
+    });
   }
+
   return (
     <Box p={24}>
-      <p>{errorMessage}</p>
-      <h1>Collection Name:</h1>
       <Formik
         initialValues={{ name: "", image: "" }}
         validationSchema={formSchema}
@@ -81,12 +79,36 @@ export default function AddCollectionForm({
       >
         {(props) => (
           <form onSubmit={props.handleSubmit}>
-            <Input name="name" onChange={Formik.handleChange} />
-            <RadioGroup name="avatar" py={2} display="flex" gridColumnGap={2}>
-              {AVATARS.map(({ image }) => {
-                return <ImageRadio key={image} image={image} value={image} />;
-              })}
-            </RadioGroup>
+            <FormControl isInvalid={!!props.errors.name && props.touched.name}>
+              <FormLabel htmlFor="name">Collection Name:</FormLabel>
+              <Field
+                as={Input}
+                id="name"
+                name="name"
+                onChange={Formik.handleChange}
+              />
+              <FormErrorMessage>{props.errors.name}</FormErrorMessage>
+            </FormControl>
+            <FormControl
+              isInvalid={!!props.errors.avatar && props.touched.avatar}
+            >
+              <FormLabel mt="5" htmlFor="avatar">
+                Choose an Icon:
+              </FormLabel>
+              <Field
+                as={RadioGroup}
+                id="avatar"
+                name="avatar"
+                py={2}
+                display="flex"
+                gridColumnGap={2}
+              >
+                {AVATARS.map(({ image }) => {
+                  return <ImageRadio key={image} image={image} value={image} />;
+                })}
+              </Field>
+              <FormErrorMessage>{props.errors.avatar}</FormErrorMessage>
+            </FormControl>
             <Button type="submit">Submit</Button>
           </form>
         )}

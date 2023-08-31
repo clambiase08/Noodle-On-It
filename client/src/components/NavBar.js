@@ -59,25 +59,16 @@ export default function NavBar({ collections, user, setUser }) {
             href: "/collections",
             children: userCollections,
           },
-          {
-            label: "Add Recipe",
-            href: "/add-recipe",
-          },
         ]
-      : [
-          {
-            label: "Add Recipe",
-            href: "/signup",
-          },
-        ]),
-    // {
-    //   label: "Home",
-    //   href: "/",
-    // },
-    // {
-    //   label: "Add Recipe",
-    //   href: "/add-recipe",
-    // },
+      : []),
+    {
+      label: "Home",
+      href: "/",
+    },
+    {
+      label: "Add Recipe",
+      href: user ? "/add-recipe" : "/signup",
+    },
   ];
 
   return (

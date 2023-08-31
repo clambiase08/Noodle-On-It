@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Formik, useFormik } from "formik";
-import { Select, Button } from "@chakra-ui/react";
+import { Formik, useFormik, Field } from "formik";
+import {
+  Select,
+  Button,
+  Textarea,
+  SelectField,
+  FormLabel,
+} from "@chakra-ui/react";
 
 // http://localhost:4000/images/spaghetti.png
 
@@ -19,7 +25,7 @@ import {
 } from "@chakra-ui/react";
 import IngredientList from "./IngredientList";
 
-export default function DishDetail({ dishes, collections }) {
+export default function DishDetail({ dishes, collections, user }) {
   const [toggleNote, setToggleNote] = useState(false);
   const [notesList, setNotesList] = useState([]);
 
@@ -80,6 +86,10 @@ export default function DishDetail({ dishes, collections }) {
     );
   });
 
+  const instructionsElements = dish.instructions.map((instruction, index) => (
+    <p key={index}>{instruction}</p>
+  ));
+
   function handlePostNote(value) {
     const new_note = {
       notes: value["notes"],
@@ -117,25 +127,48 @@ export default function DishDetail({ dishes, collections }) {
     >
       {(props) => (
         <form onSubmit={props.handleSubmit}>
-          <textarea
-            type="paragraph"
+          <Field
+            as={Textarea}
             // type="text"
             onChange={props.handleChange}
             value={props.values.notes}
             name="notes"
             style={{ border: "1px solid" }}
             required
-          ></textarea>
-          <Select
+            placeholder="Add notes here..."
+            focusBorderColor="orange.300"
+            color="orange.500"
+            _placeholder={{ color: "inherit" }}
+            mb="5"
+            w="90%"
+          ></Field>
+          <FormLabel color="orange.600" htmlFor="collection">
+            Add to a Collection:
+          </FormLabel>
+          <Field
+            as={SelectField}
+            id="collection"
             type="string"
             name="collection"
             onChange={props.handleChange}
-            w={"200px"}
+            w={"90%"}
+            variant={"outline"}
+            size={"lg"}
+            borderColor="orange.300"
             required
+            mb="5"
           >
             {collectionsDropdown}
-          </Select>
-          <Button type="submit">Submit</Button>
+          </Field>
+          <Button
+            bg={"orange.400"}
+            fontWeight={600}
+            color={"white"}
+            size="md"
+            type="submit"
+          >
+            Submit
+          </Button>
         </form>
       )}
     </Formik>
@@ -145,16 +178,20 @@ export default function DishDetail({ dishes, collections }) {
     <Grid
       h="200px"
       templateRows="repeat(2, 1fr)"
-      templateColumns="repeat(5, 1fr)"
+      templateColumns="repeat(6, 1fr)"
       gap={4}
       // background="#FCF8F3"
       mt="20"
     >
-      <GridItem rowSpan={1} colSpan={1}>
+      <GridItem rowSpan={2} colSpan={2}>
         <Card>
           <CardBody>
             <Image
-              src={`http://localhost:4000/${dish.image}`}
+              src={
+                dish.image.startsWith("http")
+                  ? `${dish.image}`
+                  : `http://localhost:4000/${dish.image}`
+              }
               alt={dish.dish_name}
               borderRadius="lg"
             />
@@ -200,35 +237,49 @@ export default function DishDetail({ dishes, collections }) {
           width="357px"
           maxWidth="100%"
         >
-          <Box mt="5">{dish.instructions}</Box>
+          <Box mt="5">{instructionsElements}</Box>
         </Text>
       </GridItem>
-      <GridItem colSpan={5} ml="10">
-        <Button type="submit" onClick={handleToggleNote}>
-          Add Note
-        </Button>
-        <Text
-          lineHeight="1.5"
-          fontWeight="bold"
-          fontSize="20px"
-          color="Color . Gray 3"
-          width="357px"
-          maxWidth="100%"
-          mt="10"
-        >
-          Notes:
-        </Text>
-        {toggleNote ? noteForm : null}
-        <Text
-          lineHeight="1.5"
-          fontWeight="medium"
-          fontSize="18px"
-          color="Color . Gray 3"
-          maxWidth="100%"
-        >
-          {notesToDisplay}
-        </Text>
-      </GridItem>
+      {user ? (
+        <>
+          <GridItem colSpan={2} ml="10">
+            <Text
+              lineHeight="1.5"
+              fontWeight="bold"
+              fontSize="20px"
+              color="Color . Gray 3"
+              width="357px"
+              maxWidth="100%"
+              mt="5"
+            >
+              Notes:
+            </Text>
+            <Text
+              lineHeight="1.5"
+              fontWeight="medium"
+              fontSize="18px"
+              color="Color . Gray 3"
+              maxWidth="100%"
+            >
+              {notesToDisplay}
+            </Text>
+          </GridItem>
+          <GridItem colSpan={2} mt="10">
+            <Button
+              colorScheme="orange"
+              variant="outline"
+              type="submit"
+              onClick={handleToggleNote}
+              mb="5"
+            >
+              Add Note
+            </Button>
+            {toggleNote ? noteForm : null}
+          </GridItem>
+        </>
+      ) : (
+        ""
+      )}
     </Grid>
   );
 }
