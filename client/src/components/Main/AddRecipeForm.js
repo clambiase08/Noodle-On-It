@@ -195,6 +195,17 @@ export default function AddRecipeForm({ ingredientList }) {
                   />
                 </FormControl>
               </Box>
+              <Box>
+                <FormControl id="imageURL">
+                  <FormLabel>Add Image URL</FormLabel>
+                  <ChakraInput
+                    type="text"
+                    name="image"
+                    value={formik.values.image}
+                    onChange={formik.handleChange}
+                  />
+                </FormControl>
+              </Box>
               <HStack>
                 <FormControl id="time_to_prepare" isRequired>
                   <FormLabel>How long to prepare?</FormLabel>
@@ -216,16 +227,22 @@ export default function AddRecipeForm({ ingredientList }) {
               <Box>
                 <FormControl id="instructions" isRequired>
                   <FormLabel>Instructions for Cooking</FormLabel>
+                  <Box>(1. Please 2. Write 3. Like 4. This)</Box>
                   <Textarea
                     type="paragraph"
                     value={formik.values.instructions}
                     onChange={formik.handleChange}
+                    style={{ resize: "none" }}
+                    rows="10"
                   />
                 </FormControl>
               </Box>
               <div>
                 <Stack align={"center"}>
-                  <Box>Add Ingredients!</Box>
+                  <br />
+                  <Box>
+                    <b>Add Ingredients!</b>
+                  </Box>
                   <Box>(Must add at least 1)</Box>
 
                   <br />
