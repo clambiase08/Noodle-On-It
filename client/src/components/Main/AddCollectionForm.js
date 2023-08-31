@@ -89,11 +89,26 @@ export default function AddCollectionForm({
               />
               <FormErrorMessage>{props.errors.name}</FormErrorMessage>
             </FormControl>
-            <RadioGroup name="avatar" py={2} display="flex" gridColumnGap={2}>
-              {AVATARS.map(({ image }) => {
-                return <ImageRadio key={image} image={image} value={image} />;
-              })}
-            </RadioGroup>
+            <FormControl
+              isInvalid={!!props.errors.avatar && props.touched.avatar}
+            >
+              <FormLabel mt="5" htmlFor="avatar">
+                Choose an Icon:
+              </FormLabel>
+              <Field
+                as={RadioGroup}
+                id="avatar"
+                name="avatar"
+                py={2}
+                display="flex"
+                gridColumnGap={2}
+              >
+                {AVATARS.map(({ image }) => {
+                  return <ImageRadio key={image} image={image} value={image} />;
+                })}
+              </Field>
+              <FormErrorMessage>{props.errors.avatar}</FormErrorMessage>
+            </FormControl>
             <Button type="submit">Submit</Button>
           </form>
         )}

@@ -56,11 +56,14 @@ export default function CollectionCard({
   function handleDelete() {
     fetch(`/collections/${id}`, {
       method: "DELETE",
-    }).then((res) => res.json());
-    const updatedCollections = collections.filter(
-      (collection) => collection.id !== id
-    );
-    setCollections(updatedCollections);
+    })
+      // .then((res) => res.json())
+      .then(() => {
+        const updatedCollections = collections.filter(
+          (collection) => collection.id !== id
+        );
+        setCollections(updatedCollections);
+      });
   }
 
   return (
