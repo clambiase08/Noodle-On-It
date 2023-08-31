@@ -17,20 +17,24 @@ export default function CollectionDetail({ collections }) {
     return <div>Collection not found</div>;
   }
 
-  const collectionDishes = collection.notes.map((note) => {
-    const handleClick = () => {
-      history.push(`/dish-details/${note.dish.id}`);
-    };
-    return (
-      <DishCard
-        key={note.id}
-        name={note.dish.dish_name}
-        image={note.dish.image}
-        onClick={handleClick}
-        displayUser={false}
-      />
-    );
-  });
+  const collectionDishes = collection.notes
+    .filter((value, index, self) => {
+      return self.findIndex((v) => v.dish.id === value.dish.id) === index;
+    })
+    .map((note) => {
+      const handleClick = () => {
+        history.push(`/dish-details/${note.dish.id}`);
+      };
+      return (
+        <DishCard
+          key={note.id}
+          name={note.dish.dish_name}
+          image={note.dish.image}
+          onClick={handleClick}
+          displayUser={false}
+        />
+      );
+    });
 
   const handleClickAddRecipe = () => {
     history.push("/");
