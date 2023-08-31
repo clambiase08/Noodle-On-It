@@ -87,6 +87,7 @@ export default function AddRecipeForm({ ingredientList }) {
     },
     validationSchema: formSchema,
     onSubmit: (value) => {
+      // Maybe put something in here to alert user if no ingredients added
       console.log(value);
       fetch("/dishes", {
         method: "POST",
