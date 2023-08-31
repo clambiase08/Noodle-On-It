@@ -61,10 +61,6 @@ export default function NavBar({ collections, user, setUser }) {
           },
         ]
       : []),
-    // {
-    //   label: "Home",
-    //   href: "/",
-    // },
     {
       label: "Add Recipe",
       href: user ? "/add-recipe" : "/signup",
