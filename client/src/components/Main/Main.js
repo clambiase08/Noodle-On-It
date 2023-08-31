@@ -40,6 +40,7 @@ export default function Main({ collections, user, setCollections }) {
             dishes={dishes}
             collections={collections}
             setCollections={setCollections}
+            user={user}
           />
         </Route>
         <Route exact path="/collections">

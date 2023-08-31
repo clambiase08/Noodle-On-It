@@ -7,6 +7,7 @@ from flask import request, make_response, session, abort
 from flask_restful import Resource
 from models import *
 from werkzeug.exceptions import Unauthorized
+import re
 
 # Local imports
 from config import app, db, api
@@ -41,8 +42,16 @@ class Signup(Resource):
         db.session.commit()
         session["user_id"] = new_user.id
 
-        all = Collection(name="all", user_id=new_user.id)
-        favorite = Collection(name="favorites", user_id=new_user.id)
+        all = Collection(
+            name="all",
+            user_id=new_user.id,
+            image="images/all-collection.png",
+        )
+        favorite = Collection(
+            name="favorites",
+            user_id=new_user.id,
+            image="images/favorites.png",
+        )
 
         db.session.add(all)
         db.session.add(favorite)
@@ -100,6 +109,8 @@ class Dishes(Resource):
             dish.to_dict(rules=("-quantities.ingredient.quantities",))
             for dish in Dish.query.all()
         ]
+        for dish in dishes:
+            dish["instructions"] = re.split(r"\d+\.\s", dish["instructions"])[1:]
         return make_response(dishes, 200)
 
     def post(self):
