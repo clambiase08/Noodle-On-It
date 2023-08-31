@@ -18,6 +18,7 @@ export default function CollectionDetail({ collections }) {
   }
 
   const collectionDishes = collection.notes.map((note) => {
+    console.log(note);
     const handleClick = () => {
       history.push(`/dish-details/${note.dish.id}`);
     };
