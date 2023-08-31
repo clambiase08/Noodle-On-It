@@ -81,13 +81,17 @@ export default function CollectionCard({
         <Stack mt="6" spacing="3">
           <Flex justifyContent="space-between" alignItems="center">
             <Heading size="md">{nameJSX}</Heading>
-            <IconButton
-              size="sm"
-              icon={<FaTrashAlt />}
-              variant="outline"
-              colorScheme="orange"
-              onClick={handleDelete}
-            ></IconButton>
+            {name === "all" ? (
+              ""
+            ) : (
+              <IconButton
+                size="sm"
+                icon={<FaTrashAlt />}
+                variant="outline"
+                colorScheme="orange"
+                onClick={handleDelete}
+              ></IconButton>
+            )}
           </Flex>
         </Stack>
       </CardBody>

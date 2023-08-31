@@ -127,7 +127,7 @@ class Quantity(db.Model, SerializerMixin):
     # )
 
     id = db.Column(db.Integer, primary_key=True)
-    quantity = db.Column(db.Integer)
+    quantity = db.Column(db.Float)
     measurement = db.Column(db.String)
     dish_id = db.Column(db.Integer, db.ForeignKey("dishes.id"))
     ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredients.id"))
