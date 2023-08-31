@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import DishCard from "./DishCard";
-import { Card, SimpleGrid, Text } from "@chakra-ui/react";
+import { Card, SimpleGrid, Text, Center, Button } from "@chakra-ui/react";
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 
@@ -32,6 +32,10 @@ export default function CollectionDetail({ collections }) {
     );
   });
 
+  const handleClickAddRecipe = () => {
+    history.push("/");
+  };
+
   return (
     <Card>
       <Text
@@ -48,6 +52,17 @@ export default function CollectionDetail({ collections }) {
       <SimpleGrid columns={4} spacing={4} mt="10">
         {collectionDishes}
       </SimpleGrid>
+      <Center>
+        <Button
+          alignItems={"center"}
+          colorScheme="orange"
+          mt="10"
+          variant="outline"
+          onClick={handleClickAddRecipe}
+        >
+          Add A Recipe To Collection
+        </Button>
+      </Center>
     </Card>
   );
 }

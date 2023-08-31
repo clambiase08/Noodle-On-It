@@ -14,7 +14,11 @@ export default function DishCard({ name, image, user, onClick, displayUser }) {
     <CardBody onClick={onClick}>
       <Center>
         <Image
-          src={`http://localhost:4000/${image}`}
+          src={
+            image.startsWith("http")
+              ? `${image}`
+              : `http://localhost:4000/${image}`
+          }
           alt={name}
           borderRadius="lg"
           boxSize="xs"
