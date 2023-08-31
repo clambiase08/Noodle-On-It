@@ -110,6 +110,7 @@ export default function DishDetail({ dishes, collections, user }) {
           const notesToSpread = [...notesList];
           notesToSpread.unshift(note);
           setNotesList(notesToSpread);
+          window.location.reload();
         });
       } else {
         r.json().then((error) => {
