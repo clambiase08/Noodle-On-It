@@ -147,7 +147,7 @@ export default function AddRecipeForm({ ingredientList }) {
 
   const formSchema2 = yup.object().shape({
     quantity: yup.number().required("Please enter a time to prepare"),
-    measurement: yup.string().required("Please enter a measrement"),
+    measurement: yup.string().required("Please enter a measurement"),
   });
 
   const formik2 = useFormik({
