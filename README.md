@@ -15,9 +15,6 @@ The following features are planned for future development on the Noodle-On-It we
 •	Jonathan Paul-Reuven
 
 ## Visuals
-If you're using this template, start off by removing the existing metadata for
-Github and Canvas. Run the following command to carry this out:
-
 ![image](https://github.com/clambiase08/Noodle-On-It/assets/74999391/d2a7663f-4648-442a-a4f4-23467d72ccc6)
 ![image](https://github.com/clambiase08/Noodle-On-It/assets/74999391/43e5294d-5e54-4b49-9517-59b167e6035f)
 ![image](https://github.com/clambiase08/Noodle-On-It/assets/74999391/d281f137-156d-4f89-9acb-42069966882e)
