@@ -7,7 +7,9 @@ Noodle-On-It is a web application that allows users to view recipes from other u
 
 ## Future Ideas
 The following features are planned for future development on the Noodle-On-It web app:
+
 •	**Favorite/Heart Button:** Allow users to add a dish to their favorites collection by clicking on a button on a dish card
+
 •	**Web Scraping:** Allow users to simply copy and paste a link of a dish and automatically populate the required data
 
 ## Authors
