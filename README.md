@@ -29,39 +29,54 @@ Noodle-On-It is a web-based application, so there is no need for any installatio
 ## Usage
 ### Signing In/Signing Up
 •	If you don’t have an account, click on the “Sign Up” button in the top right corner of the page.
+
 •	Fill in all the required inputs and click submit.
+
 •	You will automatically have an “All” and a “Favorites” collection
+
 •	If you do have an account, click on the “Sign In” button in the top right corner of the page, fill in your details, and click submit.
 
 ### View Dish Recipes and Add a Note
 •	To navigate to any dish page, click on any dish card on the home page or in a collection page, where you can see ingredients and instructions
+
 •	To add a note, click the “Add Note” button on the side, select which collection you’d like the dish to be added to, enter a comment, and click submit.
 
 ### Adding a New Collections Page:
 •	Navigate to the “Your Collections” tab and click the “Add Collection”
+
 •	Fill in the name of the collection, and choose an icon to go along with the collection.
+
 •	Once finished, click submit
+
 •	To add recipes to the collections page, go to a specific dish, add a note, and be sure to select the specific collections page you would like to add to. 
 
 ### Adding a New Recipe:
 •	Navigate to the “Add Recipe” tab, and fill in all required inputs
+
 •	An image is optional, but if one is not provided, a default image will be added.
+
 •	Be sure to add at least 1 set of ingredients before adding a dish
+
 •	Finally, click “Add Dish”, and you will be able to view it in the home page
 
 ### Getting All the Ingredients of a Specific Collections Page:
 •	To get all unique ingredients of a specific collections page, click the “Your Collections” tab.
+
 •	On the specific collection that has the ingredients you want, click the “Get Shopping List” button.
+
 •	You will now see a complete list of all of that  collection’s unique ingredients 
 
 ## Support
 If you encounter any issues or have any questions regarding the Noodle-On-It web app, you can reach out to us through the following channels:
+
 •	GitHub Issue Tracker
+
 •	Christina: Email, Jonathan: Email
 
 ## Roadmap
 Here are some planned features for future releases:
 •	Version 1.1: Implement favoriting button on all dishes to instantly add to your favorites collection.
+
 •	Version 1.2: Introduce web scraping to automatically read recipes from external websites.
 
 ## Contributing
