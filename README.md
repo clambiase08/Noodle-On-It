@@ -75,6 +75,7 @@ If you encounter any issues or have any questions regarding the Noodle-On-It web
 
 ## Roadmap
 Here are some planned features for future releases:
+
 •	Version 1.1: Implement favoriting button on all dishes to instantly add to your favorites collection.
 
 •	Version 1.2: Introduce web scraping to automatically read recipes from external websites.
